@@ -24,7 +24,21 @@ function Cadastro({ onVoltarLogin, setToken }) {
 
             const jwt = resposta.data.token;
 
+            // Salva o token de autenticação
             localStorage.setItem("token", jwt);
+
+            // Salva os dados do usuário
+            localStorage.setItem(
+                "nomeUsuario",
+                resposta.data.nome
+            );
+
+            localStorage.setItem(
+                "emailUsuario",
+                resposta.data.email
+            );
+
+            // Entra automaticamente no sistema
             setToken(jwt);
 
         } catch (err) {
@@ -95,7 +109,8 @@ function Cadastro({ onVoltarLogin, setToken }) {
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        autoComplete="off"                        required
+                        autoComplete="off"
+                        required
                     />
                 </div>
 
@@ -130,6 +145,7 @@ function Cadastro({ onVoltarLogin, setToken }) {
                 >
                     Cadastrar
                 </button>
+
             </form>
 
             <button
@@ -147,6 +163,7 @@ function Cadastro({ onVoltarLogin, setToken }) {
             >
                 Voltar para o login
             </button>
+
         </div>
     );
 }

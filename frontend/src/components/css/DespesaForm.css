@@ -1,0 +1,204 @@
+.despesa-form {
+    background: #1c1d24;
+
+    border: 1px solid #30313a;
+    border-radius: 14px;
+
+    padding: 25px;
+    margin-bottom: 30px;
+
+    color: #f5f5f5;
+}
+
+.despesa-form h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+
+    font-size: 22px;
+}
+
+
+/* CAMPOS */
+
+.campo-despesa {
+    margin-bottom: 18px;
+}
+
+.campo-despesa label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #ccc;
+
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.campo-despesa input,
+.campo-despesa select {
+    box-sizing: border-box;
+
+    width: 100%;
+
+    padding: 11px 12px;
+
+    border: 1px solid #3a3b45;
+    border-radius: 7px;
+
+    background: #121318;
+    color: white;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+.campo-despesa input::placeholder {
+    color: #777;
+}
+
+.campo-despesa input:focus,
+.campo-despesa select:focus {
+    outline: none;
+
+    border-color: #6b7cff;
+
+    box-shadow: 0 0 0 2px rgba(107, 124, 255, 0.15);
+}
+
+
+/* SELECT */
+
+.campo-despesa select {
+    cursor: pointer;
+}
+
+.campo-despesa select option {
+    background: #121318;
+    color: white;
+}
+
+
+/* CHECKBOX */
+
+.checkbox-despesa {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin: 20px 0;
+
+    color: #ccc;
+
+    font-size: 14px;
+}
+
+.checkbox-despesa input {
+    width: 17px;
+    height: 17px;
+
+    cursor: pointer;
+}
+
+.checkbox-despesa label {
+    cursor: pointer;
+}
+
+
+/* ERRO */
+
+.erro-despesa {
+    margin-bottom: 18px;
+
+    padding: 10px 12px;
+
+    border-radius: 7px;
+
+    background: rgba(229, 72, 77, 0.12);
+
+    border: 1px solid rgba(229, 72, 77, 0.3);
+
+    color: #ff6b6b;
+
+    font-size: 14px;
+}
+
+
+/* BOTÕES */
+
+.botoes-despesa {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+.botao-salvar-despesa,
+.botao-cancelar-despesa {
+    border: none;
+
+    border-radius: 7px;
+
+    padding: 11px 18px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.botao-salvar-despesa {
+    background: #5865f2;
+
+    color: white;
+
+    flex: 1;
+}
+
+.botao-salvar-despesa:hover {
+    background: #4752c4;
+}
+
+.botao-salvar-despesa:disabled {
+    background: #3f4350;
+
+    color: #999;
+
+    cursor: not-allowed;
+}
+
+.botao-cancelar-despesa {
+    background: #33343d;
+
+    color: #ddd;
+}
+
+.botao-cancelar-despesa:hover {
+    background: #41424d;
+}
+
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 650px) {
+
+    .despesa-form {
+        padding: 20px;
+    }
+
+    .botoes-despesa {
+        flex-direction: column;
+    }
+
+    .botao-salvar-despesa,
+    .botao-cancelar-despesa {
+        width: 100%;
+    }
+}
