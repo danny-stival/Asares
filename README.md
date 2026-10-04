@@ -86,3 +86,8 @@ O projeto é desenvolvido de forma incremental em sprints semanais, seguindo Scr
 ## Status do Projeto
 
 🚧 Concluído N1. 
+
+
+## Diagrama de relacionamento
+
+<img width="846" height="626" alt="image" src="https://github.com/user-attachments/assets/16fdcffb-e5f9-4187-81fc-ae4990606005" />
