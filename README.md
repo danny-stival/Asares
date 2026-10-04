@@ -85,4 +85,4 @@ O projeto é desenvolvido de forma incremental em sprints semanais, seguindo Scr
 
 ## Status do Projeto
 
-🚧 Em desenvolvimento — Sprints 1, 2 e 3 concluídas. Sprint 4 em planejamento. 
+🚧 Concluído N1. 
