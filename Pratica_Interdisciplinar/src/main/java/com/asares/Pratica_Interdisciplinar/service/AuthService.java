@@ -26,37 +26,64 @@ public class AuthService {
     // US02 - Cadastro de usuario
     @Transactional
     public TokenResponseDTO cadastrar(CadastroRequestDTO dto) {
-        if (usuarioRepository.existsByEmail(dto.email())) {
-            throw new IllegalArgumentException("Ja existe um usuario cadastrado com este email");
+
+        String nome = dto.nome().trim();
+        String email = dto.email().trim();
+
+        if (usuarioRepository.existsByEmail(email)) {
+            throw new IllegalArgumentException(
+                    "Ja existe um usuario cadastrado com este email"
+            );
         }
 
         Usuario usuario = Usuario.builder()
-                .nome(dto.nome())
-                .email(dto.email())
+                .nome(nome)
+                .email(email)
                 .senha(passwordEncoder.encode(dto.senha()))
                 .build();
 
         usuarioRepository.save(usuario);
 
         String token = jwtUtil.gerarToken(usuario.getEmail());
-        return new TokenResponseDTO(token, usuario.getNome(), usuario.getEmail());
+
+        return new TokenResponseDTO(
+                token,
+                usuario.getNome(),
+                usuario.getEmail()
+        );
     }
 
     // US01 - Login
     public TokenResponseDTO login(LoginRequestDTO dto) {
+
+        String email = dto.email().trim();
+
         try {
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(dto.email(), dto.senha())
+                    new UsernamePasswordAuthenticationToken(
+                            email,
+                            dto.senha()
+                    )
             );
         } catch (Exception e) {
-            throw new BadCredentialsException("Email ou senha invalidos");
+            throw new BadCredentialsException(
+                    "Email ou senha invalidos"
+            );
         }
 
-        Usuario usuario = usuarioRepository.findByEmail(dto.email())
-                .orElseThrow(() -> new BadCredentialsException("Email ou senha invalidos"));
+        Usuario usuario = usuarioRepository.findByEmail(email)
+                .orElseThrow(() ->
+                        new BadCredentialsException(
+                                "Email ou senha invalidos"
+                        )
+                );
 
         String token = jwtUtil.gerarToken(usuario.getEmail());
-        return new TokenResponseDTO(token, usuario.getNome(), usuario.getEmail());
+
+        return new TokenResponseDTO(
+                token,
+                usuario.getNome(),
+                usuario.getEmail()
+        );
     }
 }
-

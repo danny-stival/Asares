@@ -1,7 +1,6 @@
 package com.asares.Pratica_Interdisciplinar.service;
 
 import com.asares.Pratica_Interdisciplinar.dto.ReceitaRequestDTO;
-// 1. IMPORTANTE: Importamos o DTO de resposta para evitar o retorno da entidade direta
 import com.asares.Pratica_Interdisciplinar.dto.ReceitaResponseDTO;
 import com.asares.Pratica_Interdisciplinar.model.Receita;
 import com.asares.Pratica_Interdisciplinar.model.Usuario;
@@ -22,8 +21,8 @@ public class ReceitaService {
 
     // US03 - Cadastrar receita
     @Transactional
-    // 2. MUDANÇA: O retorno mudou de Receita para ReceitaResponseDTO
     public ReceitaResponseDTO cadastrar(String emailUsuarioLogado, ReceitaRequestDTO dto) {
+
         Usuario usuario = buscarUsuario(emailUsuarioLogado);
 
         Receita receita = Receita.builder()
@@ -35,25 +34,75 @@ public class ReceitaService {
                 .build();
 
         Receita receitaSalva = receitaRepository.save(receita);
-        
-        // 3. MUDANÇA: Instancia o DTO passando a receita salva, isolando o relacionamento de Usuario
+
         return new ReceitaResponseDTO(receitaSalva);
     }
 
-    // 4. MUDANÇA: O retorno da listagem agora é List<ReceitaResponseDTO>
+    // Listar receitas do usuário logado
     @Transactional(readOnly = true)
     public List<ReceitaResponseDTO> listarPorUsuario(String emailUsuarioLogado) {
+
         Usuario usuario = buscarUsuario(emailUsuarioLogado);
-        
-        // 5. MUDANÇA: Converte cada entidade Receita da lista para um ReceitaResponseDTO
-        return receitaRepository.findByUsuarioIdOrderByDataDesc(usuario.getId())
+
+        return receitaRepository
+                .findByUsuarioIdOrderByDataDesc(usuario.getId())
                 .stream()
                 .map(ReceitaResponseDTO::new)
                 .toList();
     }
 
+    // Editar uma receita
+    @Transactional
+    public ReceitaResponseDTO editar(
+            String emailUsuarioLogado,
+            Long id,
+            ReceitaRequestDTO dto) {
+
+        Usuario usuario = buscarUsuario(emailUsuarioLogado);
+
+        Receita receita = receitaRepository
+                .findByIdAndUsuarioId(id, usuario.getId())
+                .orElseThrow(() ->
+                        new IllegalArgumentException(
+                                "Receita não encontrada ou não pertence ao usuário."
+                        ));
+
+        receita.setDescricao(dto.descricao());
+        receita.setValor(dto.valor());
+        receita.setData(dto.data());
+        receita.setCategoria(dto.categoria());
+
+        Receita receitaAtualizada = receitaRepository.save(receita);
+
+        return new ReceitaResponseDTO(receitaAtualizada);
+    }
+
+    // Excluir uma receita
+    @Transactional
+    public void excluir(
+            String emailUsuarioLogado,
+            Long id) {
+
+        Usuario usuario = buscarUsuario(emailUsuarioLogado);
+
+        Receita receita = receitaRepository
+                .findByIdAndUsuarioId(id, usuario.getId())
+                .orElseThrow(() ->
+                        new IllegalArgumentException(
+                                "Receita não encontrada ou não pertence ao usuário."
+                        ));
+
+        receitaRepository.delete(receita);
+    }
+
+    // Busca o usuário pelo email do token JWT
     private Usuario buscarUsuario(String email) {
+
         return usuarioRepository.findByEmail(email)
-                .orElseThrow(() -> new IllegalStateException("Usuario logado nao encontrado"));
+                .orElseThrow(() ->
+                        new IllegalStateException(
+                                "Usuário não encontrado."
+                        ));
     }
 }
+

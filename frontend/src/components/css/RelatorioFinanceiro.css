@@ -1,0 +1,201 @@
+/* Container principal */
+.relatorio-financeiro {
+    background: #1c1d24;
+    border: 1px solid #30313a;
+    border-radius: 14px;
+    padding: 25px;
+    margin-bottom: 25px;
+    color: #f5f5f5;
+}
+
+/* Cabeçalho */
+
+.relatorio-cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.relatorio-cabecalho h2 {
+    margin: 0;
+    font-size: 21px;
+}
+
+.relatorio-cabecalho p {
+    margin: 6px 0 0;
+    color: #999;
+    font-size: 14px;
+}
+
+/* Cards do resumo */
+
+.relatorio-resumo {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.relatorio-card {
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #30313a;
+    background: #121318;
+}
+
+.relatorio-card span {
+    display: block;
+    color: #aaa;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.relatorio-card strong {
+    display: block;
+    font-size: 22px;
+}
+
+/* Receita */
+
+.relatorio-card.receita {
+    border-left: 4px solid #22c55e;
+}
+
+.relatorio-card.receita strong {
+    color: #22c55e;
+}
+
+/* Despesa */
+
+.relatorio-card.despesa {
+    border-left: 4px solid #e5484d;
+}
+
+.relatorio-card.despesa strong {
+    color: #e5484d;
+}
+
+/* Saldo */
+
+.relatorio-card.saldo {
+    border-left: 4px solid #5865f2;
+}
+
+.relatorio-card.saldo strong {
+    color: #5865f2;
+}
+
+/* Despesas por categoria */
+
+.relatorio-categorias {
+    border-top: 1px solid #30313a;
+    padding-top: 25px;
+}
+
+.relatorio-categorias h3 {
+    margin-top: 0;
+    margin-bottom: 18px;
+    font-size: 17px;
+}
+
+/* Lista de categorias */
+
+.lista-categorias {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.categoria-relatorio {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 13px 15px;
+
+    background: #121318;
+    border: 1px solid #30313a;
+    border-radius: 8px;
+
+    transition: 0.2s;
+}
+
+.categoria-relatorio:hover {
+    border-color: #454754;
+    transform: translateX(2px);
+}
+
+.categoria-relatorio span {
+    color: #ddd;
+    font-size: 14px;
+}
+
+.categoria-relatorio strong {
+    color: #e5484d;
+    font-size: 14px;
+}
+
+/* Quando não existem dados */
+
+.sem-dados {
+    color: #888;
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Quantidade de movimentações */
+
+.relatorio-movimentacoes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+
+    margin-top: 25px;
+    padding-top: 25px;
+
+    border-top: 1px solid #30313a;
+}
+
+.relatorio-movimentacoes div {
+    background: #121318;
+    border: 1px solid #30313a;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.relatorio-movimentacoes span {
+    display: block;
+    color: #999;
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+.relatorio-movimentacoes strong {
+    font-size: 18px;
+    color: #f5f5f5;
+}
+
+/* Erro */
+
+.erro-relatorio {
+    color: #ff6b6b;
+    margin: 0;
+}
+
+/* Responsividade */
+
+@media (max-width: 700px) {
+
+    .relatorio-resumo {
+        grid-template-columns: 1fr;
+    }
+
+    .relatorio-movimentacoes {
+        grid-template-columns: 1fr;
+    }
+
+    .relatorio-financeiro {
+        padding: 20px;
+    }
+}
