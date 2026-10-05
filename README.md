@@ -18,12 +18,31 @@ O desenvolvimento segue **Scrum**, com sprints semanais. Cada sprint é encerrad
 
 Nesta primeira fase do projeto, atuamos nas seguintes frentes:
 
-| ID   | História de Usuário                                                                                      | Prioridade |    Pontos | Status |
+| ID   | História de Usuário                                                                                
+Explore
+Marketplace
+MCP registry
+Top repositories
+￼
+￼
+danny-stival/Asares
+￼
+WadneyT/SismotoMob
+￼
+WadneyT/SismotoFinal
+￼
+WadneyT/TreinoAPP
+￼
+WadneyT/ProjetoWEB2
+￼
+Show more
+Skip to content
+      | Prioridade |    Pontos | Status |
 | ---- | -------------------------------------------------------------------------------------------------------- | ---------- | --------: | ------ |
 | US01 | Como usuário, quero realizar login no sistema para que minhas informações financeiras fiquem protegidas. | Alta       |         3 | Concluído |
 | US02 | Como usuário, quero realizar meu cadastro para que eu possa utilizar o sistema.                          | Alta       |         3 | Concluído |
 | US03 | Como usuário, quero cadastrar receitas para que eu possa controlar minhas entradas financeiras.          | Alta       |         5 | Concluído |
-| US04 | Como usuário, quero cadastrar despesas para que eu possa controlar meus gastos.                          | Alta       | A definir | Concluído |
+| US04 | Como usuário, quero cadastrar despesas para que eu possa controlar meus gastos.                          | Alta       |         5 | Concluído |
 
 > Escopo entregue nas Sprints 1 e 2: arquitetura inicial, banco de dados, autenticação, cadastro de usuários e registro de movimentações (receitas e despesas), com apresentação do incremento aos usuários.
 
@@ -32,13 +51,26 @@ Nesta primeira fase do projeto, atuamos nas seguintes frentes:
 Sprint 3 — foco em funcionalidades de busca e filtro sobre as movimentações já cadastradas:
 
 | ID   | História de Usuário                                                                                          | Prioridade | Responsável                        | Status |
-| ---- | -------------------------------------------------------------------------------------------------------------- | ---------- | ----------------------------------- | ------ |
+| ---- | -------------------------------------------------------------------------------------------------------------- | ----------| ----------------------------------- | ------ |
 | US05 | Como usuário, quero buscar movimentações por texto livre para encontrar rapidamente um lançamento específico. | Alta       | Wellen (front) + Dany/Taynara (back) | Concluído |
 | US06 | Como usuário, quero filtrar movimentações por categoria para analisar meus gastos e receitas por tipo.        | Alta       | Wellen (front) + Dany/Taynara (back) | Concluído |
 | US07 | Como usuário, quero combinar múltiplos filtros ao mesmo tempo para refinar minha análise financeira.          | Média      | Dany/Taynara (back)                 | Concluído |
 | US08 | Como usuário, quero ordenar os resultados (data, valor, nome) para visualizar as movimentações como preferir. | Média      | Wellen (front)                      | Concluído |
 
 > Escopo entregue na Sprint 3: busca por texto livre, filtro por categoria, filtros combinados e ordenação dos resultados.
+
+## Terceira Fase
+
+Sprint 4 — foco em funcionalidades de análise financeira, visualização de dados e geração de relatórios:
+
+| ID   | História de Usuário                                                                                                                                             | Prioridade | Pontos    | Status    |
+| ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------- | --------- |
+| US09 | Como usuário, quero consultar minhas movimentações por período para que eu possa analisar minhas finanças diariamente, semanalmente, mensalmente ou anualmente. | Média      | 5         | Concluído |
+| US10 | Como usuário, quero visualizar gráficos financeiros para que eu possa compreender melhor meus gastos.                                                           | Média      | 5         | Concluído |
+| US11 | Como usuário, quero gerar relatórios financeiros para que eu possa analisar minha situação financeira.                                                          | Média      | 5          | Concluído |
+
+> Escopo entregue na Sprint 4: consulta das movimentações por diferentes períodos, visualização gráfica das informações financeiras e geração de relatórios para análise da situação financeira.
+
 
 ## Objetivo
 
