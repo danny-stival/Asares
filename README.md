@@ -18,26 +18,7 @@ O desenvolvimento segue **Scrum**, com sprints semanais. Cada sprint é encerrad
 
 Nesta primeira fase do projeto, atuamos nas seguintes frentes:
 
-| ID   | História de Usuário                                                                                
-Explore
-Marketplace
-MCP registry
-Top repositories
-￼
-￼
-danny-stival/Asares
-￼
-WadneyT/SismotoMob
-￼
-WadneyT/SismotoFinal
-￼
-WadneyT/TreinoAPP
-￼
-WadneyT/ProjetoWEB2
-￼
-Show more
-Skip to content
-      | Prioridade |    Pontos | Status |
+| ID   | História de Usuário                                                                                      | Prioridade |    Pontos | Status |
 | ---- | -------------------------------------------------------------------------------------------------------- | ---------- | --------: | ------ |
 | US01 | Como usuário, quero realizar login no sistema para que minhas informações financeiras fiquem protegidas. | Alta       |         3 | Concluído |
 | US02 | Como usuário, quero realizar meu cadastro para que eu possa utilizar o sistema.                          | Alta       |         3 | Concluído |
