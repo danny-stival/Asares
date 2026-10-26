@@ -52,6 +52,16 @@ Sprint 4 — foco em funcionalidades de análise financeira, visualização de d
 
 > Escopo entregue na Sprint 4: consulta das movimentações por diferentes períodos, visualização gráfica das informações financeiras e geração de relatórios para análise da situação financeira.
 
+## Quarta Fase
+
+Sprint 5 — foco em melhorias de experiência de uso, com personalização visual e modernização da interface:
+
+| ID   | História de Usuário                                                                                                                                  | Prioridade | Pontos | Status       |
+| ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | -----: | ------------ |
+| US12 | Como usuário, quero ativar o modo escuro para que eu possa utilizar o sistema com mais conforto visual, principalmente em ambientes com pouca luz.    | Média      |      3 | Em andamento |
+| US13 | Como usuário, quero uma interface com botões e visual do site mais modernos e agradáveis para que eu tenha uma experiência de uso mais clara e atrativa. | Baixa      |      3 | Em andamento |
+
+> Escopo da Sprint 5: modo escuro com preferência de tema salva e padronização visual de botões e do site.
 
 ## Objetivo
 
@@ -98,9 +108,21 @@ O projeto é desenvolvido de forma incremental em sprints semanais, seguindo Scr
 
 ## Status do Projeto
 
-🚧 Concluído N1. 
+🚧 Em andamento. 
 
 
 ## Diagrama de relacionamento
 
 <img width="846" height="626" alt="image" src="https://github.com/user-attachments/assets/16fdcffb-e5f9-4187-81fc-ae4990606005" />
+
+
+## Diagrama de Caso de Uso
+
+N1
+<img width="1303" height="2239" alt="image" src="https://github.com/user-attachments/assets/7c82b5d1-67f2-400f-8eb4-371dab73aa95" />
+
+N2
+<img width="1252" height="506" alt="image" src="https://github.com/user-attachments/assets/397b57de-8f0f-46b4-9422-3ef6e7302926" />
+
+<img width="1252" height="506" alt="image" src="https://github.com/user-attachments/assets/07558861-a796-4f51-95f0-73082d0d3b64" />
+
