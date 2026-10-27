@@ -69,13 +69,9 @@ function ReceitaList({ onEditar, onExcluido }) {
     return <p>Nenhuma receita cadastrada.</p>;
   }
 
+
   return (
-    <ul
-      style={{
-        listStyle: "none",
-        paddingLeft: 0,
-      }}
-    >
+    <ul style={{ listStyle: "none", paddingLeft: 0 }}>
       {receitas.map((receita) => (
         <ReceitaItem
           key={receita.id}
@@ -87,5 +83,6 @@ function ReceitaList({ onEditar, onExcluido }) {
     </ul>
   );
 }
+
 
 export default ReceitaList;

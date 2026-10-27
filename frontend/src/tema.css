@@ -1,0 +1,164 @@
+
+/* ========================================
+   TEMA ESCURO - ASARES
+   ======================================== */
+
+.app-logado {
+    --tema-fundo: #F5F7F5;
+    --tema-cartao: #FFFFFF;
+    --tema-texto: #16352B;
+    --tema-secundario: #718078;
+    --tema-borda: #E3EAE5;
+    --tema-superficie: #F8FAF8;
+
+    background-color: var(--tema-fundo);
+    color: var(--tema-texto);
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.app-logado[data-theme="escuro"] {
+    --tema-fundo: #151A18;
+    --tema-cartao: #202824;
+    --tema-texto: #EDF5EF;
+    --tema-secundario: #AAB9AF;
+    --tema-borda: #35443B;
+    --tema-superficie: #252F29;
+
+    background-color: var(--tema-fundo);
+    color: var(--tema-texto);
+}
+
+/* Fundo principal */
+
+.app-logado[data-theme="escuro"] .dashboard {
+    background-color: var(--tema-fundo);
+    color: var(--tema-texto);
+}
+
+/* Cabeçalho e seções */
+
+.app-logado[data-theme="escuro"] .dashboard-header,
+.app-logado[data-theme="escuro"] .finance-section,
+.app-logado[data-theme="escuro"] .relatorio-financeiro {
+    background-color: var(--tema-cartao);
+    border-color: var(--tema-borda);
+    color: var(--tema-texto);
+}
+
+.app-logado[data-theme="escuro"] .dashboard-header h1,
+.app-logado[data-theme="escuro"] .section-title h2,
+.app-logado[data-theme="escuro"] .relatorio-cabecalho h2,
+.app-logado[data-theme="escuro"] .relatorio-categorias h3 {
+    color: var(--tema-texto);
+}
+
+.app-logado[data-theme="escuro"] .dashboard-header p,
+.app-logado[data-theme="escuro"] .section-title p,
+.app-logado[data-theme="escuro"] .relatorio-cabecalho p,
+.app-logado[data-theme="escuro"] .relatorio-card span,
+.app-logado[data-theme="escuro"] .relatorio-movimentacoes span {
+    color: var(--tema-secundario);
+}
+
+/* Cartões do relatório */
+
+.app-logado[data-theme="escuro"] .relatorio-card,
+.app-logado[data-theme="escuro"] .categoria-relatorio,
+.app-logado[data-theme="escuro"] .relatorio-movimentacoes div {
+    background-color: var(--tema-superficie);
+    border-color: var(--tema-borda);
+}
+
+.app-logado[data-theme="escuro"] .relatorio-card.receita {
+    background-color: #1C3327;
+    border-left-color: #35C982;
+}
+
+.app-logado[data-theme="escuro"] .relatorio-card.receita strong {
+    color: #35C982;
+}
+
+.app-logado[data-theme="escuro"] .relatorio-card.despesa {
+    background-color: #382423;
+    border-left-color: #F07171;
+}
+
+.app-logado[data-theme="escuro"] .relatorio-card.despesa strong,
+.app-logado[data-theme="escuro"] .categoria-relatorio strong {
+    color: #F07171;
+}
+
+.app-logado[data-theme="escuro"] .relatorio-card.saldo {
+    background-color: #25332B;
+    border-left-color: #8CCBA7;
+}
+
+.app-logado[data-theme="escuro"] .relatorio-card.saldo strong,
+.app-logado[data-theme="escuro"] .relatorio-movimentacoes strong {
+    color: #8CCBA7;
+}
+
+.app-logado[data-theme="escuro"] .categoria-relatorio span {
+    color: var(--tema-texto);
+}
+
+.app-logado[data-theme="escuro"] .categoria-relatorio:hover {
+    background-color: #303D34;
+    border-color: #506858;
+}
+
+.app-logado[data-theme="escuro"] .relatorio-categorias,
+.app-logado[data-theme="escuro"] .relatorio-movimentacoes {
+    border-color: var(--tema-borda);
+}
+
+.app-logado[data-theme="escuro"] .sem-dados {
+    color: var(--tema-secundario);
+    background-color: var(--tema-superficie);
+}
+
+/* Botão de tema no menu */
+
+.menu-botao-tema {
+    border-color: rgba(255, 255, 255, 0.25);
+    color: #FFFFFF;
+}
+
+.menu-botao-tema:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Elementos de formulários */
+
+.app-logado[data-theme="escuro"] input,
+.app-logado[data-theme="escuro"] select,
+.app-logado[data-theme="escuro"] textarea {
+    background-color: #202824;
+    color: #EDF5EF;
+    border-color: #506056;
+}
+
+.app-logado[data-theme="escuro"] input::placeholder,
+.app-logado[data-theme="escuro"] textarea::placeholder {
+    color: #AAB9AF;
+}
+
+/* Ajustes para gráficos */
+
+.app-logado[data-theme="escuro"] .recharts-cartesian-axis-tick-value,
+.app-logado[data-theme="escuro"] .recharts-legend-item-text {
+    fill: #D5E1D8;
+    color: #D5E1D8;
+}
+
+.app-logado[data-theme="escuro"] .recharts-cartesian-grid line {
+    stroke: #3A4940;
+}
+
+/* Adaptação para telas pequenas */
+
+@media (max-width: 600px) {
+    .menu-botao-tema {
+        margin-left: 0;
+    }
+}

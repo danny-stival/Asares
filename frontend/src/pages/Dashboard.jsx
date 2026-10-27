@@ -101,44 +101,6 @@ function Dashboard({ onLogout }) {
   return (
     <div className="dashboard">
 
-      {/* Cabeçalho */}
-      <header className="dashboard-header">
-
-        <div>
-          <h1>ASARES</h1>
-          <p>Painel Financeiro</p>
-        </div>
-
-        <button
-          onClick={onLogout}
-          className="logout-button"
-        >
-          Sair
-        </button>
-
-      </header>
-
-
-      {/* Botões para adicionar movimentações */}
-      <section className="actions">
-
-        <button
-          className="action-button expense-button"
-          onClick={abrirNovaDespesa}
-        >
-          + Nova despesa
-        </button>
-
-        <button
-          className="action-button income-button"
-          onClick={abrirNovaReceita}
-        >
-          + Nova receita
-        </button>
-
-      </section>
-
-
       {/* Formulário de despesa */}
       {mostrarDespesa && (
         <DespesaForm
@@ -201,7 +163,7 @@ function Dashboard({ onLogout }) {
             className="small-add-button expense-button"
             onClick={abrirNovaDespesa}
           >
-            + Adicionar
+            + Adicionar Nova Despesa
           </button>
 
         </div>
@@ -230,7 +192,7 @@ function Dashboard({ onLogout }) {
             className="small-add-button income-button"
             onClick={abrirNovaReceita}
           >
-            + Adicionar
+            + Adicionar Nova Receita
           </button>
 
         </div>
