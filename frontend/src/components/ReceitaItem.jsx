@@ -1,3 +1,4 @@
+
 function ReceitaItem({ receita, onEditar, onExcluir }) {
   return (
     <li
@@ -11,15 +12,17 @@ function ReceitaItem({ receita, onEditar, onExcluir }) {
       }}
     >
       {/* Informações da receita */}
-      <div>
+      <div style={{ flex: 1 }}>
         <strong>{receita.descricao}</strong> — R${" "}
         {Number(receita.valor).toFixed(2)} |{" "}
-        <span style={{ color: "#666" }}>{receita.categoria}</span> | Data:{" "}
-        {receita.data}
+        <span style={{ color: "#666" }}>
+          {receita.categoria}
+        </span>{" "}
+        | Data: {receita.data}
       </div>
 
-      {/* Botões */}
-      <div style={{ display: "flex", gap: "8px" }}>
+      {/* Botões alinhados à direita */}
+      <div style={{ display: "flex", gap: "8px", flexShrink: 0 }}>
         <button
           type="button"
           onClick={() => onEditar(receita)}
