@@ -269,6 +269,7 @@ function DespesaForm({ despesaEditando, onSalvo, onCancelar }) {
         </label>
       </div>
 
+
       {/* BOTÕES */}
       <div className="botoes-despesa">
         <button
@@ -279,20 +280,20 @@ function DespesaForm({ despesaEditando, onSalvo, onCancelar }) {
           {salvando
             ? "Salvando..."
             : despesaEditando
-            ? "Salvar alterações"
-            : "Cadastrar despesa"}
+              ? "Salvar alterações"
+              : "Cadastrar despesa"}
         </button>
 
-        {despesaEditando && (
-          <button
-            type="button"
-            className="botao-cancelar-despesa"
-            onClick={onCancelar}
-          >
-            Cancelar
-          </button>
-        )}
+        <button
+          type="button"
+          className="botao-cancelar-despesa"
+          onClick={onCancelar}
+          disabled={salvando}
+        >
+          Cancelar
+        </button>
       </div>
+
     </form>
   );
 }

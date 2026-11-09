@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./css/FiltroPeriodo.css";
 
 function FiltroPeriodo({ onAlterar }) {
 
@@ -15,14 +16,7 @@ function FiltroPeriodo({ onAlterar }) {
     }
 
     return (
-        <div
-            style={{
-                marginBottom: "25px",
-                display: "flex",
-                alignItems: "center",
-                gap: "10px"
-            }}
-        >
+        <div className="filtro-periodo">
 
             <label htmlFor="periodo">
                 <strong>Período:</strong>
@@ -32,28 +26,11 @@ function FiltroPeriodo({ onAlterar }) {
                 id="periodo"
                 value={periodo}
                 onChange={alterarPeriodo}
-                style={{
-                    padding: "8px 12px",
-                    borderRadius: "5px",
-                    border: "1px solid #ccc",
-                    cursor: "pointer"
-                }}
             >
-                <option value="diario">
-                    Diário
-                </option>
-
-                <option value="semanal">
-                    Semanal
-                </option>
-
-                <option value="mensal">
-                    Mensal
-                </option>
-
-                <option value="anual">
-                    Anual
-                </option>
+                <option value="diario">Diário</option>
+                <option value="semanal">Semanal</option>
+                <option value="mensal">Mensal</option>
+                <option value="anual">Anual</option>
             </select>
 
         </div>

@@ -27,6 +27,7 @@ function DespesaItem({ despesa, onEditar, onExcluir }) {
       <div style={{ display: "flex", gap: "8px" }}>
         <button
           type="button"
+          className="botao-item botao-editar"
           onClick={() => onEditar(despesa)}
         >
           Editar
@@ -34,6 +35,7 @@ function DespesaItem({ despesa, onEditar, onExcluir }) {
 
         <button
           type="button"
+          className="botao-item botao-excluir"
           onClick={() => onExcluir(despesa.id)}
         >
           Excluir

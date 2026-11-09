@@ -25,6 +25,7 @@ function ReceitaItem({ receita, onEditar, onExcluir }) {
       <div style={{ display: "flex", gap: "8px", flexShrink: 0 }}>
         <button
           type="button"
+          className="botao-item botao-editar"
           onClick={() => onEditar(receita)}
         >
           Editar
@@ -32,6 +33,7 @@ function ReceitaItem({ receita, onEditar, onExcluir }) {
 
         <button
           type="button"
+          className="botao-item botao-excluir"
           onClick={() => onExcluir(receita.id)}
         >
           Excluir

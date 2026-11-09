@@ -244,19 +244,18 @@ function ReceitaForm({ receitaEditando, onSalvo, onCancelar }) {
           {salvando
             ? "Salvando..."
             : receitaEditando
-            ? "Salvar alterações"
-            : "Cadastrar receita"}
+              ? "Salvar alterações"
+              : "Cadastrar receita"}
         </button>
 
-        {receitaEditando && (
-          <button
-            type="button"
-            className="botao-cancelar-receita"
-            onClick={onCancelar}
-          >
-            Cancelar
-          </button>
-        )}
+        <button
+          type="button"
+          className="botao-cancelar-receita"
+          onClick={onCancelar}
+          disabled={salvando}
+        >
+          Cancelar
+        </button>
       </div>
     </form>
   );

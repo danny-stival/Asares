@@ -2,7 +2,7 @@
 import { useState } from "react";
 import api from "../services/api";
 
-function Login({ setToken, onCriarConta }) {
+function Login({ setToken, onCriarConta, tema, onAlternarTema }) {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const [erroLogin, setErroLogin] = useState("");
@@ -44,23 +44,48 @@ function Login({ setToken, onCriarConta }) {
             justifyContent: "center",
             padding: "24px",
             boxSizing: "border-box",
-            background: "#F5F7F5",
-            fontFamily: 'system-ui, "Segoe UI", sans-serif'
+            background: "var(--tema-fundo)",
+            color: "var(--tema-texto)",
+            fontFamily: 'system-ui, "Segoe UI", sans-serif',
+            position: "relative",
+            transition: "background 0.3s, color 0.3s"
         }}>
+
+            {/* Botão para alternar o tema */}
+            <button
+                type="button"
+                onClick={onAlternarTema}
+                style={{
+                    position: "absolute",
+                    top: "24px",
+                    right: "24px",
+                    padding: "10px 16px",
+                    background: "var(--tema-cartao)",
+                    color: "var(--tema-texto)",
+                    border: "1px solid var(--tema-borda)",
+                    borderRadius: "10px",
+                    fontSize: "14px",
+                    fontWeight: "600",
+                    cursor: "pointer"
+                }}
+            >
+                {tema === "claro" ? "🌙 Modo escuro" : "☀️ Modo claro"}
+            </button>
+
             <div style={{
                 width: "100%",
                 maxWidth: "380px",
                 boxSizing: "border-box",
                 padding: "32px",
-                border: "1px solid #E3EAE5",
+                border: "1px solid var(--tema-borda)",
                 borderRadius: "18px",
-                background: "#FFFFFF",
-                color: "#16352B",
+                background: "var(--tema-cartao)",
+                color: "var(--tema-texto)",
                 boxShadow: "0 8px 30px rgba(22, 53, 43, 0.08)"
             }}>
                 <h1 style={{
                     textAlign: "center",
-                    color: "#16352B",
+                    color: "var(--tema-texto)",
                     fontSize: "32px",
                     margin: "0 0 8px"
                 }}>
@@ -69,7 +94,7 @@ function Login({ setToken, onCriarConta }) {
 
                 <p style={{
                     textAlign: "center",
-                    color: "#718078",
+                    color: "var(--tema-secundario)",
                     fontSize: "14px",
                     marginBottom: "28px"
                 }}>
@@ -77,7 +102,7 @@ function Login({ setToken, onCriarConta }) {
                 </p>
 
                 <h2 style={{
-                    color: "#16352B",
+                    color: "var(--tema-texto)",
                     fontSize: "24px",
                     marginBottom: "22px"
                 }}>
@@ -105,7 +130,7 @@ function Login({ setToken, onCriarConta }) {
                             style={{
                                 display: "block",
                                 marginBottom: "8px",
-                                color: "#16352B",
+                                color: "var(--tema-texto)",
                                 fontSize: "14px",
                                 fontWeight: "500"
                             }}
@@ -125,10 +150,10 @@ function Login({ setToken, onCriarConta }) {
                                 boxSizing: "border-box",
                                 width: "100%",
                                 padding: "12px",
-                                border: "1px solid #D5DED8",
+                                border: "1px solid var(--tema-borda)",
                                 borderRadius: "8px",
-                                background: "#FFFFFF",
-                                color: "#16352B",
+                                background: "var(--tema-superficie)",
+                                color: "var(--tema-texto)",
                                 fontSize: "15px"
                             }}
                         />
@@ -140,7 +165,7 @@ function Login({ setToken, onCriarConta }) {
                             style={{
                                 display: "block",
                                 marginBottom: "8px",
-                                color: "#16352B",
+                                color: "var(--tema-texto)",
                                 fontSize: "14px",
                                 fontWeight: "500"
                             }}
@@ -160,10 +185,10 @@ function Login({ setToken, onCriarConta }) {
                                 boxSizing: "border-box",
                                 width: "100%",
                                 padding: "12px",
-                                border: "1px solid #D5DED8",
+                                border: "1px solid var(--tema-borda)",
                                 borderRadius: "8px",
-                                background: "#FFFFFF",
-                                color: "#16352B",
+                                background: "var(--tema-superficie)",
+                                color: "var(--tema-texto)",
                                 fontSize: "15px"
                             }}
                         />
@@ -196,7 +221,7 @@ function Login({ setToken, onCriarConta }) {
                         padding: "12px",
                         marginTop: "8px",
                         background: "transparent",
-                        color: "#16352B",
+                        color: "var(--tema-texto)",
                         border: "none",
                         cursor: "pointer",
                         fontSize: "14px"
@@ -206,13 +231,13 @@ function Login({ setToken, onCriarConta }) {
                 </button>
 
                 <div style={{
-                    borderTop: "1px solid #E3EAE5",
+                    borderTop: "1px solid var(--tema-borda)",
                     marginTop: "16px",
                     paddingTop: "20px"
                 }}>
                     <p style={{
                         textAlign: "center",
-                        color: "#718078",
+                        color: "var(--tema-secundario)",
                         fontSize: "14px",
                         marginBottom: "12px"
                     }}>
@@ -225,9 +250,9 @@ function Login({ setToken, onCriarConta }) {
                         style={{
                             width: "100%",
                             padding: "12px",
-                            background: "#EAF2ED",
-                            color: "#16352B",
-                            border: "1px solid #D5DED8",
+                            background: "var(--tema-superficie)",
+                            color: "var(--tema-texto)",
+                            border: "1px solid var(--tema-borda)",
                             borderRadius: "8px",
                             fontSize: "15px",
                             fontWeight: "600",

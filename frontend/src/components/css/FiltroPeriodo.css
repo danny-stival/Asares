@@ -1,0 +1,81 @@
+/* Área do filtro */
+.filtro-periodo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+}
+
+/* Texto do filtro */
+.filtro-periodo label {
+    color: var(--tema-texto);
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+/* Caixa de seleção */
+.filtro-periodo select {
+    padding: 9px 30px 9px 12px;
+    border: 1px solid var(--tema-borda);
+    border-radius: 8px;
+
+    background-color: var(--tema-superficie);
+    color: var(--tema-texto);
+
+    font-size: 13px;
+    cursor: pointer;
+    outline: none;
+
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Quando o usuário seleciona o campo */
+.filtro-periodo select:focus {
+    border-color: #16A36A;
+    box-shadow: 0 0 0 3px rgba(22, 163, 106, 0.12);
+}
+
+
+/* Botão de seleção do período */
+.filtro-periodo select {
+    min-width: 125px;
+    padding: 10px 35px 10px 14px;
+
+    border: 1px solid var(--tema-borda);
+    border-radius: 9px;
+
+    background-color: var(--tema-cartao);
+    color: var(--tema-texto);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+    outline: none;
+
+    transition: all 0.2s ease;
+}
+
+/* Efeito ao passar o mouse */
+.filtro-periodo select:hover {
+    border-color: #16A36A;
+}
+
+/* Efeito ao clicar */
+.filtro-periodo select:focus {
+    border-color: #16A36A;
+    box-shadow: 0 0 0 3px rgba(22, 163, 106, 0.15);
+}
+
+/* Opções do menu */
+.filtro-periodo select option {
+    background-color: var(--tema-cartao);
+    color: var(--tema-texto);
+}
+
+/* Modo escuro */
+.app-logado[data-theme="escuro"] .filtro-periodo select {
+    background-color: #252F29;
+    color: #EDF5EF;
+    border-color: #35443B;
+}

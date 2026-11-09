@@ -1,15 +1,15 @@
 
+import { NavLink } from "react-router-dom";
 import "./css/Menu.css";
 
 function Menu({
-    paginaAtual,
-    onMudarPagina,
     onLogout,
     tema,
     onAlternarTema
 }) {
     return (
         <nav className="menu-principal" aria-label="Menu principal">
+
             <div className="menu-marca">
                 <div className="menu-logo" aria-hidden="true">A</div>
 
@@ -22,25 +22,43 @@ function Menu({
             </div>
 
             <div className="menu-links">
-                <button
-                    type="button"
-                    className={`menu-botao ${
-                        paginaAtual === "inicio" ? "ativo" : ""
-                    }`}
-                    onClick={() => onMudarPagina("inicio")}
+
+                <NavLink
+                    to="/"
+                    end
+                    className={({ isActive }) =>
+                        `menu-botao ${isActive ? "ativo" : ""}`
+                    }
                 >
                     Início
-                </button>
+                </NavLink>
 
-                <button
-                    type="button"
-                    className={`menu-botao ${
-                        paginaAtual === "perfil" ? "ativo" : ""
-                    }`}
-                    onClick={() => onMudarPagina("perfil")}
+                <NavLink
+                    to="/receitas"
+                    className={({ isActive }) =>
+                        `menu-botao ${isActive ? "ativo" : ""}`
+                    }
+                >
+                    Receitas
+                </NavLink>
+
+                <NavLink
+                    to="/despesas"
+                    className={({ isActive }) =>
+                        `menu-botao ${isActive ? "ativo" : ""}`
+                    }
+                >
+                    Despesas
+                </NavLink>
+
+                <NavLink
+                    to="/perfil"
+                    className={({ isActive }) =>
+                        `menu-botao ${isActive ? "ativo" : ""}`
+                    }
                 >
                     Perfil
-                </button>
+                </NavLink>
 
                 <button
                     type="button"
@@ -67,6 +85,7 @@ function Menu({
                 >
                     Sair
                 </button>
+
             </div>
         </nav>
     );
