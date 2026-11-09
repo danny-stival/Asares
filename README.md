@@ -58,8 +58,124 @@ Sprint 5 — foco em melhorias de experiência de uso, com personalização visu
 
 | ID   | História de Usuário                                                                                                                                  | Prioridade | Pontos | Status       |
 | ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | -----: | ------------ |
-| US12 | Como usuário, quero ativar o modo escuro para que eu possa utilizar o sistema com mais conforto visual, principalmente em ambientes com pouca luz.    | Média      |      3 | Em andamento |
-| US13 | Como usuário, quero uma interface com botões e visual do site mais modernos e agradáveis para que eu tenha uma experiência de uso mais clara e atrativa. | Baixa      |      3 | Em andamento |
+| US12 | Como usuário, quero ativar o modo escuro para que eu possa utilizar o sistema com mais conforto visual, principalmente em ambientes com pouca luz.    | Média      |      3 | Concluída |
+| US13 | Como usuário, quero uma interface com botões e visual do site mais modernos e agradáveis para que eu tenha uma experiência de uso mais clara e atrativa. | Baixa      |      3 | Concluída |
+
+# US14 – Metas financeiras
+
+## Resumo
+
+| Campo | Valor |
+|---|---|
+| ID | US14 |
+| Prioridade | Média |
+| Pontos | 3 | 
+| Ator | Usuário |
+
+## User story
+
+> Como usuário, quero cadastrar, consultar, editar e excluir metas financeiras para que eu possa planejar e acompanhar meus objetivos.
+
+## Casos de uso
+
+| ID | Caso de uso |
+|---|---|
+| UC14.1 | Cadastrar meta |
+| UC14.2 | Consultar metas |
+| UC14.3 | Editar meta |
+| UC14.4 | Excluir meta |
+
+**Ator principal:** Usuário
+
+**Pré-condição geral:** o usuário está autenticado no sistema.
+
+### UC14.1 – Cadastrar meta
+
+**Fluxo principal**
+
+1. O usuário acessa a página de Metas.
+2. O usuário escolhe "Nova meta" e preenche os dados.
+3. O sistema valida as informações e salva a meta.
+4. O sistema exibe a meta na lista.
+
+**Fluxo alternativo**
+
+- **A1 – Dados inválidos:** se algum campo obrigatório estiver vazio ou inválido, o sistema exibe a mensagem de erro e mantém o formulário aberto.
+
+**Pós-condição:** a meta fica cadastrada e visível na lista.
+
+### UC14.2 – Consultar metas
+
+**Fluxo principal**
+
+1. O usuário acessa a página de Metas.
+2. O sistema busca as metas do usuário.
+3. O sistema exibe a lista de metas.
+
+**Fluxo alternativo**
+
+- **A1 – Sem metas:** se o usuário não tiver metas, o sistema informa que nenhuma meta foi cadastrada e oferece o cadastro de uma nova.
+
+**Pós-condição:** as metas do usuário estão visíveis.
+
+### UC14.3 – Editar meta
+
+**Fluxo principal**
+
+1. O usuário seleciona uma meta e escolhe "Editar".
+2. O sistema exibe os dados atuais em um formulário.
+3. O usuário altera os campos e confirma.
+4. O sistema valida e salva a alteração.
+
+**Fluxo alternativo**
+
+- **A1 – Dados inválidos:** o sistema exibe a mensagem de erro e mantém o formulário aberto.
+
+**Pós-condição:** a meta fica atualizada.
+
+### UC14.4 – Excluir meta
+
+**Fluxo principal**
+
+1. O usuário seleciona uma meta e escolhe "Excluir".
+2. O sistema pede confirmação.
+3. O usuário confirma.
+4. O sistema remove a meta da lista.
+
+**Fluxo alternativo**
+
+- **A1 – Cancelamento:** se o usuário cancelar a confirmação, nada é alterado.
+
+**Pós-condição:** a meta deixa de existir.
+
+## Critérios de aceitação
+
+- [ ] O usuário consegue cadastrar uma meta informando os dados obrigatórios.
+- [ ] O usuário visualiza a lista de suas metas na página de Metas.
+- [ ] O usuário consegue editar os dados de uma meta existente.
+- [ ] O usuário consegue excluir uma meta, mediante confirmação.
+- [ ] O sistema exibe mensagens claras quando os dados são inválidos.
+- [ ] Cada usuário vê e altera somente as suas próprias metas.
+
+## Diagrama de caso de uso
+
+```
+                 ┌──────────────── Sistema financeiro ────────────────┐
+                 │                                                    │
+                 │             ( Cadastrar meta )                     │
+                 │             ( Consultar metas )                    │
+  Usuário ───────┤             ( Editar meta )                        │
+                 │             ( Excluir meta )                       │
+                 │                                                    │
+                 └────────────────────────────────────────────────────┘
+```
+
+## Escopo técnico entregue
+
+- Criação da entidade Metas
+- CRUD da entidade Metas
+- Rota da página de Metas
+
 
 > Escopo da Sprint 5: modo escuro com preferência de tema salva e padronização visual de botões e do site.
 
