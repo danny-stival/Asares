@@ -1,23 +1,32 @@
+
 import { useEffect, useState } from "react";
 import api from "../services/api";
 import DespesaItem from "./DespesaItem";
+import { useConfirmacao } from "./ConfirmacaoContext";
 
 function DespesaList({ onEditar, onExcluido }) {
+
   const [despesas, setDespesas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [erro, setErro] = useState("");
 
+  const { confirmar } = useConfirmacao();
+
   // Carrega as despesas do usuário
   const carregarDespesas = () => {
+
     setLoading(true);
+    setErro("");
 
     api.get("/despesas")
       .then((resposta) => {
         setDespesas(resposta.data);
-        setLoading(false);
       })
-      .catch(() => {
+      .catch((erro) => {
+        console.error("Erro ao carregar despesas:", erro);
         setErro("Erro ao carregar despesas.");
+      })
+      .finally(() => {
         setLoading(false);
       });
   };
@@ -26,33 +35,49 @@ function DespesaList({ onEditar, onExcluido }) {
     carregarDespesas();
   }, []);
 
-  // Excluir despesa
-  const excluirDespesa = (id) => {
-    const confirmar = window.confirm(
-      "Tem certeza que deseja excluir esta despesa?"
-    );
+  // Excluir despesa utilizando o modal personalizado
+  async function excluirDespesa(id) {
 
-    if (!confirmar) {
+    const despesa = despesas.find((item) => item.id === id);
+
+    if (!despesa) {
       return;
     }
 
-    api.delete(`/despesas/${id}`)
-      .then(() => {
+    const confirmou = await confirmar({
+      titulo: "Excluir esta despesa?",
+      mensagem: "Tem certeza de que deseja excluir esta despesa? Essa ação não poderá ser desfeita.",
+      nomeItem: despesa.descricao
+    });
 
-        // Remove a despesa da lista
-        setDespesas((despesasAtuais) =>
-          despesasAtuais.filter((despesa) => despesa.id !== id)
-        );
+    // Se o usuário cancelar, interrompe a exclusão
+    if (!confirmou) {
+      return;
+    }
 
-        // Avisa o Dashboard que a despesa foi excluída
-        if (onExcluido) {
-          onExcluido(id);
-        }
-      })
-      .catch(() => {
-        setErro("Erro ao excluir despesa.");
-      });
-  };
+    try {
+
+      setErro("");
+
+      await api.delete(`/despesas/${id}`);
+
+      // Remove a despesa da lista
+      setDespesas((despesasAtuais) =>
+        despesasAtuais.filter((despesa) => despesa.id !== id)
+      );
+
+      // Avisa o Dashboard que uma despesa foi excluída
+      if (onExcluido) {
+        onExcluido(id);
+      }
+
+    } catch (erro) {
+
+      console.error("Erro ao excluir despesa:", erro);
+      setErro("Erro ao excluir despesa.");
+
+    }
+  }
 
   if (loading) {
     return <p>Carregando despesas...</p>;
@@ -67,16 +92,22 @@ function DespesaList({ onEditar, onExcluido }) {
   }
 
   return (
+
     <ul style={{ listStyle: "none", paddingLeft: 0 }}>
+
       {despesas.map((despesa) => (
+
         <DespesaItem
           key={despesa.id}
           despesa={despesa}
           onEditar={onEditar}
           onExcluir={excluirDespesa}
         />
+
       ))}
+
     </ul>
+
   );
 }
 

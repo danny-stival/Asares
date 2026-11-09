@@ -1,14 +1,20 @@
+
 import { useEffect, useState } from "react";
 import api from "../services/api";
 import ReceitaItem from "./ReceitaItem";
+import { useConfirmacao } from "./ConfirmacaoContext";
 
 function ReceitaList({ onEditar, onExcluido }) {
+
   const [receitas, setReceitas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [erro, setErro] = useState("");
 
+  const { confirmar } = useConfirmacao();
+
   // Carrega as receitas do usuário
   const carregarReceitas = () => {
+
     setLoading(true);
     setErro("");
 
@@ -29,32 +35,48 @@ function ReceitaList({ onEditar, onExcluido }) {
     carregarReceitas();
   }, []);
 
-  // Excluir receita
-  function excluirReceita(id) {
-    const confirmar = window.confirm(
-      "Tem certeza que deseja excluir esta receita?"
-    );
+  // Excluir receita utilizando o modal personalizado
+  async function excluirReceita(id) {
 
-    if (!confirmar) {
+    const receita = receitas.find((item) => item.id === id);
+
+    if (!receita) {
       return;
     }
 
-    api.delete(`/receitas/${id}`)
-      .then(() => {
-        // Remove a receita da lista
-        setReceitas((receitasAtuais) =>
-          receitasAtuais.filter((receita) => receita.id !== id)
-        );
+    const confirmou = await confirmar({
+      titulo: "Excluir esta receita?",
+      mensagem: "Tem certeza de que deseja excluir esta receita? Essa ação não poderá ser desfeita.",
+      nomeItem: receita.descricao
+    });
 
-        // Avisa o Dashboard
-        if (onExcluido) {
-          onExcluido(id);
-        }
-      })
-      .catch((erro) => {
-        console.error("Erro ao excluir receita:", erro);
-        setErro("Erro ao excluir receita.");
-      });
+    // Se o usuário cancelar, interrompe a exclusão
+    if (!confirmou) {
+      return;
+    }
+
+    try {
+
+      setErro("");
+
+      await api.delete(`/receitas/${id}`);
+
+      // Remove a receita da lista
+      setReceitas((receitasAtuais) =>
+        receitasAtuais.filter((receita) => receita.id !== id)
+      );
+
+      // Avisa o Dashboard que uma receita foi excluída
+      if (onExcluido) {
+        onExcluido(id);
+      }
+
+    } catch (erro) {
+
+      console.error("Erro ao excluir receita:", erro);
+      setErro("Erro ao excluir receita.");
+
+    }
   }
 
   if (loading) {
@@ -69,20 +91,24 @@ function ReceitaList({ onEditar, onExcluido }) {
     return <p>Nenhuma receita cadastrada.</p>;
   }
 
-
   return (
+
     <ul style={{ listStyle: "none", paddingLeft: 0 }}>
+
       {receitas.map((receita) => (
+
         <ReceitaItem
           key={receita.id}
           receita={receita}
           onEditar={onEditar}
           onExcluir={excluirReceita}
         />
+
       ))}
+
     </ul>
+
   );
 }
-
 
 export default ReceitaList;
