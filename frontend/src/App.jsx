@@ -10,6 +10,7 @@ import Dashboard from "./pages/Dashboard";
 import Perfil from "./pages/Perfil";
 import Receitas from "./pages/Receitas";
 import Despesas from "./pages/Despesas";
+import Metas from "./pages/Metas";
 
 import "./tema.css";
 
@@ -94,6 +95,12 @@ function App() {
                 <Route
                     path="/despesas"
                     element={<Despesas />}
+                />
+
+                {/* Página de metas financeiras */}
+                <Route
+                    path="/metas"
+                    element={<Metas />}
                 />
 
                 {/* Redireciona endereços inexistentes para o início */}

@@ -1,5 +1,5 @@
 
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import "./css/Menu.css";
 
 function Menu({
@@ -10,16 +10,14 @@ function Menu({
     return (
         <nav className="menu-principal" aria-label="Menu principal">
 
-            <div className="menu-marca">
+            <Link to="/" className="menu-marca">
                 <div className="menu-logo" aria-hidden="true">A</div>
 
                 <div className="menu-marca-texto">
                     <span className="menu-nome">ASARES</span>
-                    <span className="menu-subtitulo">
-                        Controle financeiro
-                    </span>
+                    <span className="menu-subtitulo">Controle financeiro</span>
                 </div>
-            </div>
+            </Link>
 
             <div className="menu-links">
 
@@ -49,6 +47,16 @@ function Menu({
                     }
                 >
                     Despesas
+                </NavLink>
+
+                {/* Nova opção de metas */}
+                <NavLink
+                    to="/metas"
+                    className={({ isActive }) =>
+                        `menu-botao ${isActive ? "ativo" : ""}`
+                    }
+                >
+                    Metas
                 </NavLink>
 
                 <NavLink

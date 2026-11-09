@@ -162,3 +162,9 @@
         padding: 10px 4px;
     }
 }
+/* VOLTAR PARA O COMEÇO AO CLICAR NO LOGO */
+.menu-marca {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
