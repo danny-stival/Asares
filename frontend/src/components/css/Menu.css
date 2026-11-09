@@ -12,8 +12,10 @@
     color: #FFFFFF;
     border-bottom: 3px solid #16A36A;
     box-shadow: 0 4px 14px rgba(22, 53, 43, 0.12);
+    font-family: inherit;
 }
 
+/* MARCA DO ASARES */
 .menu-marca {
     display: flex;
     align-items: center;
@@ -52,35 +54,63 @@
     font-size: 11px;
 }
 
+/* LINKS DO MENU */
 .menu-links {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
+/* BOTÕES E LINKS DO REACT ROUTER */
 .menu-botao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+
     padding: 11px 17px;
+
     border: 1px solid transparent;
     border-radius: 9px;
+
     background-color: transparent;
     color: #E0EAE4;
+
     font-family: inherit;
     font-size: 14px;
     font-weight: 600;
+    line-height: normal;
+
+    text-decoration: none;
+    white-space: nowrap;
+
     cursor: pointer;
-    transition: background-color 0.2s, color 0.2s;
+
+    transition:
+        background-color 0.2s,
+        color 0.2s,
+        border-color 0.2s;
 }
 
+/* EFEITO AO PASSAR O MOUSE */
 .menu-botao:hover {
     background-color: rgba(255, 255, 255, 0.10);
     color: #FFFFFF;
+    text-decoration: none;
 }
 
+/* PÁGINA ATUAL SELECIONADA */
 .menu-botao.ativo {
     background-color: #FFFFFF;
     color: #16352B;
 }
 
+/* BOTÃO DE MODO CLARO E ESCURO */
+.menu-botao-tema {
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* BOTÃO SAIR */
 .menu-botao-sair {
     margin-left: 8px;
     border-color: rgba(255, 255, 255, 0.25);
@@ -92,6 +122,7 @@
     border-color: #DC5252;
 }
 
+/* RESPONSIVIDADE PARA CELULARES */
 @media (max-width: 600px) {
     .menu-principal {
         flex-direction: column;
@@ -117,5 +148,17 @@
 
     .menu-botao-sair {
         margin-left: 0;
+    }
+}
+
+/* TELAS MUITO PEQUENAS */
+@media (max-width: 380px) {
+    .menu-links {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .menu-botao {
+        font-size: 12px;
+        padding: 10px 4px;
     }
 }

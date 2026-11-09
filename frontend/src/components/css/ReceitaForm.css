@@ -132,3 +132,51 @@
         width: 100%;
     }
 }
+
+/* ========================================
+   FORMULÁRIO DE RECEITAS - TEMAS
+   ======================================== */
+
+.receita-form {
+    background-color: var(--tema-cartao, #FFFFFF);
+    color: var(--tema-texto, #16352B);
+    border: 1px solid var(--tema-borda, #E3EAE5);
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 3px 12px rgba(22, 53, 43, 0.04);
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.receita-form h2 {
+    color: var(--tema-texto, #16352B);
+}
+
+.receita-form label {
+    color: var(--tema-texto, #16352B);
+}
+
+.receita-form input,
+.receita-form select,
+.receita-form textarea {
+    background-color: var(--tema-superficie, #F8FAF8);
+    color: var(--tema-texto, #16352B);
+    border: 1px solid var(--tema-borda, #E3EAE5);
+    border-radius: 8px;
+}
+
+.receita-form input::placeholder {
+    color: var(--tema-secundario, #718078);
+}
+
+.receita-form input:focus,
+.receita-form select:focus {
+    outline: none;
+    border-color: #16A36A;
+    box-shadow: 0 0 0 2px rgba(22, 163, 106, 0.12);
+}
+
+.receita-form .botao-cancelar-receita {
+    background-color: var(--tema-superficie);
+    color: var(--tema-texto);
+    border: 1px solid var(--tema-borda);
+}

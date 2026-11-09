@@ -1,0 +1,103 @@
+
+/* PÁGINA DE RECEITAS */
+.pagina-receitas {
+    width: 100%;
+    min-height: calc(100vh - 85px);
+    box-sizing: border-box;
+    padding: 35px 5%;
+    background-color: var(--tema-fundo);
+    color: var(--tema-texto);
+}
+
+/* CABEÇALHO */
+.receitas-cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 35px;
+}
+
+.receitas-cabecalho h1 {
+    margin: 0 0 8px;
+    font-size: 28px;
+    color: var(--tema-texto);
+}
+
+.receitas-cabecalho p {
+    margin: 0;
+    color: var(--tema-secundario);
+    font-size: 15px;
+}
+
+/* BOTÃO ADICIONAR RECEITA */
+.botao-nova-receita {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 9px;
+    background-color: #16A36A;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.botao-nova-receita:hover {
+    background-color: #128653;
+    transform: translateY(-2px);
+}
+
+/* CONTEÚDO DA LISTA */
+.receitas-conteudo {
+    padding: 25px;
+    border: 1px solid var(--tema-borda);
+    border-radius: 14px;
+    background-color: var(--tema-cartao);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+.receitas-titulo-lista {
+    margin-bottom: 22px;
+}
+
+.receitas-titulo-lista h2 {
+    margin: 0 0 6px;
+    color: var(--tema-texto);
+    font-size: 20px;
+}
+
+.receitas-titulo-lista p {
+    margin: 0;
+    color: var(--tema-secundario);
+    font-size: 14px;
+}
+
+/* FORMULÁRIO */
+.receitas-formulario {
+    margin-top: 25px;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 600px) {
+    .pagina-receitas {
+        padding: 25px 16px;
+    }
+
+    .receitas-cabecalho {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .receitas-cabecalho h1 {
+        font-size: 24px;
+    }
+
+    .botao-nova-receita {
+        width: 100%;
+    }
+
+    .receitas-conteudo {
+        padding: 18px;
+    }
+}

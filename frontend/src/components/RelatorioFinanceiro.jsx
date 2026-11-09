@@ -1,8 +1,14 @@
+
 import { useEffect, useState } from "react";
 import api from "../services/api";
+import FiltroPeriodo from "./FiltroPeriodo";
 import "./css/RelatorioFinanceiro.css";
 
-function RelatorioFinanceiro({ atualizar, periodo }) {
+function RelatorioFinanceiro({
+  atualizar,
+  periodo,
+  onAlterarPeriodo
+}) {
   const [receitas, setReceitas] = useState([]);
   const [despesas, setDespesas] = useState([]);
   const [carregando, setCarregando] = useState(true);
@@ -176,7 +182,9 @@ function RelatorioFinanceiro({ atualizar, periodo }) {
   return (
     <section className="relatorio-financeiro">
 
+      {/* Cabeçalho do relatório com filtro de período */}
       <div className="relatorio-cabecalho">
+
         <div>
           <h2>Relatório financeiro</h2>
 
@@ -185,6 +193,14 @@ function RelatorioFinanceiro({ atualizar, periodo }) {
             <strong>{nomePeriodo()}</strong>
           </p>
         </div>
+
+        {/* Filtro de período no canto direito */}
+        <div className="relatorio-filtro-periodo">
+          <FiltroPeriodo
+            onAlterar={onAlterarPeriodo}
+          />
+        </div>
+
       </div>
 
       {/* RESUMO */}

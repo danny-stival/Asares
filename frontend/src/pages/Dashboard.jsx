@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import "./Dashboard.css";
 
@@ -6,7 +7,6 @@ import ReceitaList from "../components/ReceitaList";
 import DespesaForm from "../components/DespesaForm";
 import ReceitaForm from "../components/ReceitaForm";
 import GraficoFinanceiro from "../components/GraficoFinanceiro";
-import FiltroPeriodo from "../components/FiltroPeriodo";
 import RelatorioFinanceiro from "../components/RelatorioFinanceiro";
 
 function Dashboard({ onLogout }) {
@@ -101,40 +101,11 @@ function Dashboard({ onLogout }) {
   return (
     <div className="dashboard">
 
-      {/* Formulário de despesa */}
-      {mostrarDespesa && (
-        <DespesaForm
-          despesaEditando={despesaEditando}
-          onSalvo={despesaSalva}
-          onCancelar={cancelarDespesa}
-        />
-      )}
-
-
-      {/* Formulário de receita */}
-      {mostrarReceita && (
-        <ReceitaForm
-          receitaEditando={receitaEditando}
-          onSalvo={receitaSalva}
-          onCancelar={cancelarReceita}
-        />
-      )}
-
-
-      {/* Filtro de período */}
-      <section className="finance-section">
-
-        <FiltroPeriodo
-          onAlterar={setPeriodo}
-        />
-
-      </section>
-
-
-      {/* Relatório financeiro */}
+      {/* Relatório financeiro com filtro de período */}
       <RelatorioFinanceiro
         atualizar={atualizarListas}
         periodo={periodo}
+        onAlterarPeriodo={setPeriodo}
       />
 
 
@@ -175,6 +146,20 @@ function Dashboard({ onLogout }) {
           onExcluido={atualizarDados}
         />
 
+
+        {/* Formulário de despesa aparece abaixo da lista */}
+        {mostrarDespesa && (
+          <div className="formulario-dashboard">
+
+            <DespesaForm
+              despesaEditando={despesaEditando}
+              onSalvo={despesaSalva}
+              onCancelar={cancelarDespesa}
+            />
+
+          </div>
+        )}
+
       </section>
 
 
@@ -203,6 +188,20 @@ function Dashboard({ onLogout }) {
           onEditar={editarReceita}
           onExcluido={atualizarDados}
         />
+
+
+        {/* Formulário de receita aparece abaixo da lista */}
+        {mostrarReceita && (
+          <div className="formulario-dashboard">
+
+            <ReceitaForm
+              receitaEditando={receitaEditando}
+              onSalvo={receitaSalva}
+              onCancelar={cancelarReceita}
+            />
+
+          </div>
+        )}
 
       </section>
 

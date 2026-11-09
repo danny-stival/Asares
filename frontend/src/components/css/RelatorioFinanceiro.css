@@ -1,18 +1,26 @@
 
-/* Container principal */
+/* =========================================
+   RELATÓRIO FINANCEIRO
+========================================= */
+
 .relatorio-financeiro {
     width: 100%;
-    box-sizing: border-box;
-    background: #FFFFFF;
-    border: 1px solid #E3EAE5;
+    background-color: var(--tema-cartao);
+    border: 1px solid var(--tema-borda);
     border-radius: 14px;
     padding: 25px;
     margin-bottom: 25px;
-    color: #16352B;
-    box-shadow: 0 4px 18px rgba(22, 53, 43, 0.05);
+
+    color: var(--tema-texto);
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+    box-sizing: border-box;
 }
 
-/* Cabeçalho */
+/* =========================================
+   CABEÇALHO DO RELATÓRIO
+========================================= */
+
 .relatorio-cabecalho {
     display: flex;
     justify-content: space-between;
@@ -22,209 +30,336 @@
 }
 
 .relatorio-cabecalho h2 {
-    margin: 0;
+    margin: 0 0 6px 0;
+    color: var(--tema-texto);
     font-size: 21px;
-    color: #16352B;
+    font-weight: 700;
 }
 
 .relatorio-cabecalho p {
-    margin: 6px 0 0;
-    color: #718078;
+    margin: 0;
+    color: var(--tema-secundario);
     font-size: 14px;
 }
 
 .relatorio-cabecalho p strong {
-    color: #16352B;
+    color: var(--tema-texto);
 }
 
-/* Cartões do resumo */
+/* Filtro de período */
+
+.relatorio-filtro-periodo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-shrink: 0;
+}
+
+/* =========================================
+   CARTÕES DE RESUMO
+========================================= */
+
 .relatorio-resumo {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 15px;
-    margin-bottom: 30px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
 }
 
 .relatorio-card {
-    box-sizing: border-box;
-    min-width: 0;
     padding: 20px;
-    border-radius: 10px;
-    border: 1px solid #E3EAE5;
-    background: #F8FAF8;
+    border-radius: 12px;
+    border: 1px solid var(--tema-borda);
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    min-width: 0;
 }
 
 .relatorio-card span {
-    display: block;
-    color: #718078;
-    font-size: 13px;
-    margin-bottom: 8px;
+    font-size: 14px;
+    color: var(--tema-secundario);
+    font-weight: 500;
 }
 
 .relatorio-card strong {
-    display: block;
-    font-size: 22px;
+    font-size: 23px;
+    font-weight: 700;
+    color: var(--tema-texto);
     overflow-wrap: anywhere;
 }
 
-/* Receita */
+/* Receitas */
+
 .relatorio-card.receita {
-    background: #F1FAF4;
-    border-left: 4px solid #16A36A;
+    background-color: #EAF7EF;
+    border-color: #CDEBD8;
 }
 
 .relatorio-card.receita strong {
-    color: #16A36A;
+    color: #16834A;
 }
 
-/* Despesa */
+/* Despesas */
+
 .relatorio-card.despesa {
-    background: #FFF5F4;
-    border-left: 4px solid #DC5252;
+    background-color: #FCEEEE;
+    border-color: #F3D5D5;
 }
 
 .relatorio-card.despesa strong {
-    color: #DC5252;
+    color: #D64545;
 }
 
 /* Saldo */
+
 .relatorio-card.saldo {
-    background: #F1F6F3;
-    border-left: 4px solid #16352B;
+    background-color: #EDF3F0;
+    border-color: #D5E3DB;
 }
 
 .relatorio-card.saldo strong {
     color: #16352B;
 }
 
-/* Despesas por categoria */
+/* =========================================
+   DESPESAS POR CATEGORIA
+========================================= */
+
 .relatorio-categorias {
-    border-top: 1px solid #E5EBE7;
-    padding-top: 25px;
+    margin-bottom: 25px;
 }
 
 .relatorio-categorias h3 {
-    margin-top: 0;
-    margin-bottom: 18px;
-    font-size: 17px;
-    color: #16352B;
+    color: var(--tema-texto);
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 15px 0;
 }
 
 /* Lista de categorias */
+
 .lista-categorias {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
+/* Cada categoria */
+
 .categoria-relatorio {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 16px;
-    padding: 13px 15px;
-    background: #F8FAF8;
-    border: 1px solid #E3EAE5;
-    border-radius: 8px;
-    transition: background-color 0.2s, border-color 0.2s;
+    gap: 15px;
+
+    padding: 14px 16px;
+
+    background-color: var(--tema-superficie);
+    border: 1px solid var(--tema-borda);
+    border-radius: 9px;
+
+    color: var(--tema-texto);
+    font-size: 14px;
+
+    transition: border-color 0.2s ease;
 }
 
 .categoria-relatorio:hover {
-    background: #F1F7F3;
-    border-color: #B9D8C5;
+    border-color: #16A36A;
 }
 
 .categoria-relatorio span {
-    color: #40564A;
-    font-size: 14px;
-    overflow-wrap: anywhere;
+    color: var(--tema-texto);
 }
 
 .categoria-relatorio strong {
-    color: #DC5252;
-    font-size: 14px;
+    color: #D64545;
+    font-size: 15px;
+    font-weight: 700;
     white-space: nowrap;
 }
 
-/* Quando não existem dados */
+/* Mensagem sem despesas */
+
 .sem-dados {
-    color: #718078;
+    color: var(--tema-secundario);
     font-size: 14px;
-    margin: 0;
-    padding: 18px 0;
+
+    background-color: var(--tema-superficie);
+    border: 1px dashed var(--tema-borda);
+    border-radius: 9px;
+
+    padding: 18px;
     text-align: center;
+    margin: 0;
 }
 
-/* Quantidade de movimentações */
+/* =========================================
+   QUANTIDADE DE MOVIMENTAÇÕES
+========================================= */
+
 .relatorio-movimentacoes {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 15px;
+
     margin-top: 25px;
-    padding-top: 25px;
-    border-top: 1px solid #E5EBE7;
+    padding-top: 22px;
+
+    border-top: 1px solid var(--tema-borda);
 }
 
-.relatorio-movimentacoes div {
-    box-sizing: border-box;
-    min-width: 0;
-    background: #F8FAF8;
-    border: 1px solid #E3EAE5;
-    border-radius: 8px;
-    padding: 15px;
+/* Cartões dos indicadores */
+/* Os seletores abaixo correspondem às três divs
+   que estão diretamente dentro do container. */
+
+.relatorio-movimentacoes > div {
+    background-color: var(--tema-superficie);
+    border: 1px solid var(--tema-borda);
+    border-radius: 10px;
+
+    padding: 17px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+
+    transition: border-color 0.2s ease;
 }
+
+.relatorio-movimentacoes > div:hover {
+    border-color: #16A36A;
+}
+
+/* Descrição */
 
 .relatorio-movimentacoes span {
-    display: block;
-    color: #718078;
+    color: var(--tema-secundario);
     font-size: 13px;
-    line-height: 1.5;
-    margin-bottom: 6px;
+    font-weight: 500;
 }
+
+/* Quantidade */
 
 .relatorio-movimentacoes strong {
-    font-size: 18px;
-    color: #16352B;
+    color: var(--tema-texto);
+    font-size: 22px;
+    font-weight: 700;
 }
 
-/* Erro */
-.erro-relatorio {
-    color: #B42323;
-    margin: 0;
-    padding: 12px;
-    background: #FFF1F0;
-    border-radius: 8px;
+/* =========================================
+   MODO ESCURO
+========================================= */
+
+/* Receitas */
+
+.app-logado[data-theme="escuro"] .relatorio-card.receita {
+    background-color: #20372B;
+    border-color: #315640;
 }
 
-/* Responsividade */
-@media (max-width: 700px) {
+.app-logado[data-theme="escuro"] .relatorio-card.receita strong {
+    color: #72D69A;
+}
+
+/* Despesas */
+
+.app-logado[data-theme="escuro"] .relatorio-card.despesa {
+    background-color: #3A2928;
+    border-color: #5A3937;
+}
+
+.app-logado[data-theme="escuro"] .relatorio-card.despesa strong {
+    color: #F08B83;
+}
+
+/* Saldo */
+
+.app-logado[data-theme="escuro"] .relatorio-card.saldo {
+    background-color: #29352F;
+    border-color: #405248;
+}
+
+.app-logado[data-theme="escuro"] .relatorio-card.saldo strong {
+    color: #EDF5EF;
+}
+
+/* Categorias */
+
+.app-logado[data-theme="escuro"] .categoria-relatorio {
+    background-color: #252F29;
+    border-color: #35443B;
+}
+
+.app-logado[data-theme="escuro"] .categoria-relatorio strong {
+    color: #F08B83;
+}
+
+.app-logado[data-theme="escuro"] .sem-dados {
+    background-color: #252F29;
+    border-color: #35443B;
+}
+
+/* Movimentações */
+
+.app-logado[data-theme="escuro"] .relatorio-movimentacoes > div {
+    background-color: #252F29;
+    border-color: #35443B;
+}
+
+.app-logado[data-theme="escuro"] .relatorio-movimentacoes strong {
+    color: #72D69A;
+}
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+
+@media (max-width: 768px) {
+
     .relatorio-resumo {
         grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .relatorio-card {
+        padding: 17px;
     }
 
     .relatorio-movimentacoes {
         grid-template-columns: 1fr;
     }
-
-    .relatorio-financeiro {
-        padding: 20px;
-    }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 500px) {
+
     .relatorio-financeiro {
-        padding: 14px;
+        padding: 18px;
     }
 
-    .relatorio-card {
-        padding: 16px;
+    .relatorio-cabecalho {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
     }
 
-    .relatorio-card strong {
-        font-size: 20px;
+    .relatorio-cabecalho h2 {
+        font-size: 19px;
+    }
+
+    .relatorio-filtro-periodo {
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    .relatorio-categorias h3 {
+        font-size: 16px;
     }
 
     .categoria-relatorio {
-        padding: 11px;
+        padding: 12px;
     }
 }
