@@ -39,144 +39,125 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final UserDetailsService userDetailsService;
+        private final UserDetailsService userDetailsService;
 
-    private final JwtAuthFilter jwtAuthFilter;
+        private final JwtAuthFilter jwtAuthFilter;
 
+        // Criptografa as senhas dos usuários
+        @Bean
+        public PasswordEncoder passwordEncoder() {
+                return new BCryptPasswordEncoder();
+        }
 
-    // Criptografa as senhas dos usuários
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+        // Configuração do provedor de autenticação
+        @Bean
+        public DaoAuthenticationProvider authenticationProvider() {
 
+                DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailsService);
 
-    // Configuração do provedor de autenticação
-    @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
+                provider.setPasswordEncoder(passwordEncoder());
 
-        DaoAuthenticationProvider provider =
-                new DaoAuthenticationProvider(userDetailsService);
+                return provider;
+        }
 
-        provider.setPasswordEncoder(passwordEncoder());
+        // Gerenciador de autenticação
+        @Bean
+        public AuthenticationManager authenticationManager(
+                        AuthenticationConfiguration configuration) throws Exception {
 
-        return provider;
-    }
+                return configuration.getAuthenticationManager();
+        }
 
+        // Configuração principal do Spring Security
+        @Bean
+        public SecurityFilterChain securityFilterChain(
+                        HttpSecurity http) throws Exception {
 
-    // Gerenciador de autenticação
-    @Bean
-    public AuthenticationManager authenticationManager(
-            AuthenticationConfiguration configuration) throws Exception {
+                http
 
-        return configuration.getAuthenticationManager();
-    }
+                                // CORS
+                                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
 
+                                // Desativa CSRF porque estamos usando API REST
+                                .csrf(AbstractHttpConfigurer::disable)
 
-    // Configuração principal do Spring Security
-    @Bean
-    public SecurityFilterChain securityFilterChain(
-            HttpSecurity http) throws Exception {
+                                // Não utiliza sessão
+                                .sessionManagement(session -> session.sessionCreationPolicy(
+                                                SessionCreationPolicy.STATELESS))
 
-        http
+                                // Permissões das rotas
+                                .authorizeHttpRequests(auth -> auth
 
-                // CORS
-                .cors(cors ->
-                        cors.configurationSource(corsConfigurationSource())
-                )
+                                                // Permite requisições OPTIONS
+                                                .requestMatchers(
+                                                                HttpMethod.OPTIONS,
+                                                                "/**")
+                                                .permitAll()
 
-                // Desativa CSRF porque estamos usando API REST
-                .csrf(AbstractHttpConfigurer::disable)
+                                                // Cadastro não precisa de token
+                                                .requestMatchers(
+                                                                "/auth/cadastro")
+                                                .permitAll()
 
-                // Não utiliza sessão
-                .sessionManagement(session ->
-                        session.sessionCreationPolicy(
-                                SessionCreationPolicy.STATELESS
-                        )
-                )
+                                                // Login não precisa de token
+                                                .requestMatchers(
+                                                                "/auth/login")
+                                                .permitAll()
+                                                // Recuperação de senha não precisa de autenticação
+                                                .requestMatchers(
+                                                                "/auth/recuperar-senha",
+                                                                "/auth/redefinir-senha")
+                                                .permitAll()
+                                                // Por enquanto deixa todas as outras rotas liberadas
+                                                .anyRequest().permitAll())
 
-                // Permissões das rotas
-                .authorizeHttpRequests(auth -> auth
+                                // Provedor de autenticação
+                                .authenticationProvider(
+                                                authenticationProvider())
 
-                        // Permite requisições OPTIONS
-                        .requestMatchers(
-                                HttpMethod.OPTIONS,
-                                "/**"
-                        ).permitAll()
+                                // Adiciona o filtro JWT
+                                .addFilterBefore(
+                                                jwtAuthFilter,
+                                                UsernamePasswordAuthenticationFilter.class);
 
-                        // Cadastro não precisa de token
-                        .requestMatchers(
-                                "/auth/cadastro"
-                        ).permitAll()
+                return http.build();
+        }
 
-                        // Login não precisa de token
-                        .requestMatchers(
-                                "/auth/login"
-                        ).permitAll()
+        // Configuração do CORS
+        @Bean
+        public CorsConfigurationSource corsConfigurationSource() {
 
-                        // Por enquanto deixa todas as outras rotas liberadas
-                        .anyRequest().permitAll()
-                )
+                CorsConfiguration configuration = new CorsConfiguration();
 
-                // Provedor de autenticação
-                .authenticationProvider(
-                        authenticationProvider()
-                )
+                // Endereço do React
+                configuration.setAllowedOrigins(
+                                List.of(
+                                                "http://localhost:5173",
+                                                "http://localhost:5174"));
 
-                // Adiciona o filtro JWT
-                .addFilterBefore(
-                        jwtAuthFilter,
-                        UsernamePasswordAuthenticationFilter.class
-                );
+                // Métodos permitidos
+                configuration.setAllowedMethods(
+                                List.of(
+                                                "GET",
+                                                "POST",
+                                                "PUT",
+                                                "DELETE",
+                                                "PATCH",
+                                                "OPTIONS"));
 
-        return http.build();
-    }
+                // Permite os headers enviados pelo React
+                configuration.setAllowedHeaders(
+                                List.of("*"));
 
+                // Permite credenciais
+                configuration.setAllowCredentials(true);
 
-    // Configuração do CORS
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
+                UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 
-        CorsConfiguration configuration =
-                new CorsConfiguration();
+                source.registerCorsConfiguration(
+                                "/**",
+                                configuration);
 
-        // Endereço do React
-        configuration.setAllowedOrigins(
-                List.of(
-                        "http://localhost:5173",
-                        "http://localhost:5174"
-                )
-        );
-
-        // Métodos permitidos
-        configuration.setAllowedMethods(
-                List.of(
-                        "GET",
-                        "POST",
-                        "PUT",
-                        "DELETE",
-                        "PATCH",
-                        "OPTIONS"
-                )
-        );
-
-        // Permite os headers enviados pelo React
-        configuration.setAllowedHeaders(
-                List.of("*")
-        );
-
-        // Permite credenciais
-        configuration.setAllowCredentials(true);
-
-
-        UrlBasedCorsConfigurationSource source =
-                new UrlBasedCorsConfigurationSource();
-
-        source.registerCorsConfiguration(
-                "/**",
-                configuration
-        );
-
-        return source;
-    }
+                return source;
+        }
 }

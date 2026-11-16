@@ -1,4 +1,6 @@
+
 import { useEffect, useState } from "react";
+
 import {
     BarChart,
     Bar,
@@ -7,16 +9,25 @@ import {
     CartesianGrid,
     Tooltip,
     Legend,
-    ResponsiveContainer
+    ResponsiveContainer,
+    PieChart,
+    Pie,
+    Cell
 } from "recharts";
 
 import api from "../services/api";
 
 function GraficoFinanceiro({ atualizar, periodo }) {
 
+    // Guarda os dados utilizados nos gráficos
     const [dados, setDados] = useState([]);
+
+    // Controla o carregamento e os erros
     const [carregando, setCarregando] = useState(true);
     const [erro, setErro] = useState("");
+
+    // Define qual tipo de gráfico será exibido
+    const [tipoGrafico, setTipoGrafico] = useState("barras");
 
     useEffect(() => {
 
@@ -27,6 +38,7 @@ function GraficoFinanceiro({ atualizar, periodo }) {
                 setCarregando(true);
                 setErro("");
 
+                // Busca receitas e despesas no backend
                 const [respostaReceitas, respostaDespesas] =
                     await Promise.all([
                         api.get("/receitas"),
@@ -38,7 +50,9 @@ function GraficoFinanceiro({ atualizar, periodo }) {
 
                 const hoje = new Date();
 
+                // Converte a data para evitar problemas de fuso horário
                 function criarData(dataString) {
+
                     const [ano, mes, dia] = dataString
                         .split("-")
                         .map(Number);
@@ -46,11 +60,13 @@ function GraficoFinanceiro({ atualizar, periodo }) {
                     return new Date(ano, mes - 1, dia);
                 }
 
+                // Soma movimentações dentro de um intervalo
                 function somarMovimentacoes(
                     movimentacoes,
                     dataInicial,
                     dataFinal
                 ) {
+
                     return movimentacoes
                         .filter((movimentacao) => {
 
@@ -62,6 +78,7 @@ function GraficoFinanceiro({ atualizar, periodo }) {
                                 data >= dataInicial &&
                                 data <= dataFinal
                             );
+
                         })
                         .reduce(
                             (total, movimentacao) =>
@@ -95,11 +112,13 @@ function GraficoFinanceiro({ atualizar, periodo }) {
 
                     dadosGrafico.push({
                         periodo: "Hoje",
+
                         receitas: somarMovimentacoes(
                             receitas,
                             inicio,
                             fim
                         ),
+
                         despesas: somarMovimentacoes(
                             despesas,
                             inicio,
@@ -152,11 +171,13 @@ function GraficoFinanceiro({ atualizar, periodo }) {
 
                         dadosGrafico.push({
                             periodo: nomesDias[i],
+
                             receitas: somarMovimentacoes(
                                 receitas,
                                 inicio,
                                 fim
                             ),
+
                             despesas: somarMovimentacoes(
                                 despesas,
                                 inicio,
@@ -201,11 +222,13 @@ function GraficoFinanceiro({ atualizar, periodo }) {
 
                         dadosGrafico.push({
                             periodo: String(dia),
+
                             receitas: somarMovimentacoes(
                                 receitas,
                                 inicio,
                                 fim
                             ),
+
                             despesas: somarMovimentacoes(
                                 despesas,
                                 inicio,
@@ -255,11 +278,13 @@ function GraficoFinanceiro({ atualizar, periodo }) {
 
                         dadosGrafico.push({
                             periodo: meses[mes],
+
                             receitas: somarMovimentacoes(
                                 receitas,
                                 inicio,
                                 fim
                             ),
+
                             despesas: somarMovimentacoes(
                                 despesas,
                                 inicio,
@@ -293,6 +318,32 @@ function GraficoFinanceiro({ atualizar, periodo }) {
 
     }, [atualizar, periodo]);
 
+    // Calcula o total de receitas e despesas do período
+    const totalReceitas = dados.reduce(
+        (total, item) => total + item.receitas,
+        0
+    );
+
+    const totalDespesas = dados.reduce(
+        (total, item) => total + item.despesas,
+        0
+    );
+
+    // Dados utilizados no gráfico de pizza
+    const dadosPizza = [
+        {
+            nome: "Receitas",
+            valor: totalReceitas
+        },
+        {
+            nome: "Despesas",
+            valor: totalDespesas
+        }
+    ].filter((item) => item.valor > 0);
+
+    // Cores dos gráficos
+    const cores = ["#28a745", "#dc3545"];
+
     if (carregando) {
         return <p>Carregando gráfico...</p>;
     }
@@ -306,56 +357,181 @@ function GraficoFinanceiro({ atualizar, periodo }) {
     }
 
     return (
+
         <div
             style={{
                 width: "100%",
-                height: "400px",
+                minHeight: "400px",
                 marginTop: "30px"
             }}
         >
 
             <h2>Receitas x Despesas</h2>
 
-            <ResponsiveContainer
-                width="100%"
-                height="90%"
+            {/* Botões para alternar entre os gráficos */}
+            <div
+                style={{
+                    display: "flex",
+                    gap: "10px",
+                    marginBottom: "20px",
+                    flexWrap: "wrap"
+                }}
             >
 
-                <BarChart data={dados}>
+                <button
+                    onClick={() => setTipoGrafico("barras")}
+                    style={{
+                        padding: "10px 18px",
+                        border: "none",
+                        borderRadius: "8px",
+                        cursor: "pointer",
+                        background:
+                            tipoGrafico === "barras"
+                                ? "#2563eb"
+                                : "#e5e7eb",
+                        color:
+                            tipoGrafico === "barras"
+                                ? "#ffffff"
+                                : "#333333",
+                        fontWeight: "bold"
+                    }}
+                >
+                    Gráfico de barras
+                </button>
 
-                    <CartesianGrid
-                        strokeDasharray="3 3"
-                    />
+                <button
+                    onClick={() => setTipoGrafico("pizza")}
+                    style={{
+                        padding: "10px 18px",
+                        border: "none",
+                        borderRadius: "8px",
+                        cursor: "pointer",
+                        background:
+                            tipoGrafico === "pizza"
+                                ? "#2563eb"
+                                : "#e5e7eb",
+                        color:
+                            tipoGrafico === "pizza"
+                                ? "#ffffff"
+                                : "#333333",
+                        fontWeight: "bold"
+                    }}
+                >
+                    Gráfico de pizza
+                </button>
 
-                    <XAxis
-                        dataKey="periodo"
-                    />
+            </div>
 
-                    <YAxis />
+            {/* Exibe o gráfico de barras */}
+            {tipoGrafico === "barras" && (
 
-                    <Tooltip
-                        formatter={(valor) =>
-                            `R$ ${Number(valor).toFixed(2)}`
-                        }
-                    />
+                <div style={{ width: "100%", height: "350px" }}>
 
-                    <Legend />
+                    <ResponsiveContainer width="100%" height="100%">
 
-                    <Bar
-                        dataKey="receitas"
-                        name="Receitas"
-                        fill="#28a745"
-                    />
+                        <BarChart data={dados}>
 
-                    <Bar
-                        dataKey="despesas"
-                        name="Despesas"
-                        fill="#dc3545"
-                    />
+                            <CartesianGrid
+                                strokeDasharray="3 3"
+                            />
 
-                </BarChart>
+                            <XAxis
+                                dataKey="periodo"
+                            />
 
-            </ResponsiveContainer>
+                            <YAxis />
+
+                            <Tooltip
+                                formatter={(valor) =>
+                                    `R$ ${Number(valor).toFixed(2)}`
+                                }
+                            />
+
+                            <Legend />
+
+                            <Bar
+                                dataKey="receitas"
+                                name="Receitas"
+                                fill="#28a745"
+                            />
+
+                            <Bar
+                                dataKey="despesas"
+                                name="Despesas"
+                                fill="#dc3545"
+                            />
+
+                        </BarChart>
+
+                    </ResponsiveContainer>
+
+                </div>
+
+            )}
+
+            {/* Exibe o gráfico de pizza */}
+            {tipoGrafico === "pizza" && (
+
+                <div
+                    style={{
+                        width: "100%",
+                        height: "350px"
+                    }}
+                >
+
+                    {dadosPizza.length === 0 ? (
+
+                        <p>
+                            Não existem movimentações financeiras
+                            para exibir neste período.
+                        </p>
+
+                    ) : (
+
+                        <ResponsiveContainer width="100%" height="100%">
+
+                            <PieChart>
+
+                                <Pie
+                                    data={dadosPizza}
+                                    dataKey="valor"
+                                    nameKey="nome"
+                                    cx="50%"
+                                    cy="50%"
+                                    outerRadius={120}
+                                    label={({ nome, percent }) =>
+                                        `${nome} ${(percent * 100).toFixed(1)}%`
+                                    }
+                                >
+
+                                    {dadosPizza.map((entrada, index) => (
+
+                                        <Cell
+                                            key={entrada.nome}
+                                            fill={cores[index]}
+                                        />
+
+                                    ))}
+
+                                </Pie>
+
+                                <Tooltip
+                                    formatter={(valor) =>
+                                        `R$ ${Number(valor).toFixed(2)}`
+                                    }
+                                />
+
+                                <Legend />
+
+                            </PieChart>
+
+                        </ResponsiveContainer>
+
+                    )}
+
+                </div>
+
+            )}
 
         </div>
     );
