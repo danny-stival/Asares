@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import Login from "./components/Login";
 import Cadastro from "./components/Cadastro";
@@ -11,10 +11,14 @@ import Perfil from "./pages/Perfil";
 import Receitas from "./pages/Receitas";
 import Despesas from "./pages/Despesas";
 import Metas from "./pages/Metas";
+import RedefinirSenha from "./pages/RedefinirSenha";
 
 import "./tema.css";
 
 function App() {
+    // Identifica a rota atual
+    const location = useLocation();
+
     const [token, setToken] = useState(
         localStorage.getItem("token") || ""
     );
@@ -38,6 +42,18 @@ function App() {
         localStorage.removeItem("token");
         setToken("");
         setMostrarCadastro(false);
+    }
+
+    // Permite acessar a redefinição de senha sem estar logado
+    if (location.pathname === "/redefinir-senha") {
+        return (
+            <div className="app-logado" data-theme={tema}>
+                <RedefinirSenha
+                    tema={tema}
+                    onAlternarTema={alternarTema}
+                />
+            </div>
+        );
     }
 
     // Tela de login e cadastro
@@ -86,12 +102,13 @@ function App() {
                     element={<Perfil />}
                 />
 
-                {/* Páginas da receita */}
+                {/* Página de receitas */}
                 <Route
                     path="/receitas"
                     element={<Receitas />}
                 />
 
+                {/* Página de despesas */}
                 <Route
                     path="/despesas"
                     element={<Despesas />}
