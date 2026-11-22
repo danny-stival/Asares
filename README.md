@@ -58,8 +58,10 @@ Sprint 5 — foco em melhorias de experiência de uso, com personalização visu
 
 | ID   | História de Usuário                                                                                                                                  | Prioridade | Pontos | Status       |
 | ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | -----: | ------------ |
-| US12 | Como usuário, quero ativar o modo escuro para que eu possa utilizar o sistema com mais conforto visual, principalmente em ambientes com pouca luz.    | Média      |      3 | Concluída |
-| US13 | Como usuário, quero uma interface com botões e visual do site mais modernos e agradáveis para que eu tenha uma experiência de uso mais clara e atrativa. | Baixa      |      3 | Concluída |
+| US12 | Como usuário, quero ativar o modo escuro para que eu possa utilizar o sistema com mais conforto visual, principalmente em ambientes com pouca luz.    | Média     |      3 |    Concluída |
+| US13 | Como usuário, quero uma interface com botões e visual do site mais modernos e agradáveis para que eu tenha uma experiência de uso mais clara e atrativa. | Baixa  |      3 |    Concluída |
+| US14 | Como usuário, quero cadastrar, consultar, editar e excluir metas financeiras para que eu possa planejar e acompanhar meus objetivos.                    | Média   |      3 |    Concluído |
+| US15 | Como usuário que não lembra sua senha, quero solicitar a recuperação por e-mail para criar uma nova senha e voltar a acessar minha conta com segurança. | Média   |      3 |    Concluído |
 
 # US14 – Metas financeiras
 
@@ -224,7 +226,7 @@ O projeto é desenvolvido de forma incremental em sprints semanais, seguindo Scr
 
 ## Status do Projeto
 
-🚧 Em andamento. 
+🚧 Concluído
 
 
 ## Diagrama de relacionamento
@@ -241,4 +243,9 @@ N2
 <img width="1252" height="506" alt="image" src="https://github.com/user-attachments/assets/397b57de-8f0f-46b4-9422-3ef6e7302926" />
 
 <img width="1252" height="506" alt="image" src="https://github.com/user-attachments/assets/07558861-a796-4f51-95f0-73082d0d3b64" />
+
+<img width="1264" height="943" alt="image" src="https://github.com/user-attachments/assets/46939032-b020-4464-a50e-22a262d8a57f" />
+
+<img width="1264" height="1066" alt="image" src="https://github.com/user-attachments/assets/c21ceb51-29ee-4713-ac40-4741d87d0b17" />
+
 
