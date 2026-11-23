@@ -37,9 +37,16 @@ function Cadastro({ onVoltarLogin, setToken, tema, onAlternarTema }) {
 
         } catch (err) {
             console.log("ERRO NO CADASTRO:", err);
-            console.log("RESPOSTA DO BACKEND:", err.response);
+            console.log("STATUS:", err.response?.status);
 
+            console.log(
+                "RESPOSTA DO BACKEND:",
+                JSON.stringify(err.response?.data, null, 2)
+            );
+
+            // Exibe a mensagem retornada pelo backend
             setErroCadastro(
+                err.response?.data?.mensagem ||
                 err.response?.data?.message ||
                 err.response?.data?.error ||
                 "Não foi possível criar o usuário."
@@ -122,20 +129,27 @@ function Cadastro({ onVoltarLogin, setToken, tema, onAlternarTema }) {
                     Criar conta
                 </h2>
 
+                {/* Mensagem de erro */}
                 {erroCadastro && (
-                    <p style={{
-                        color: "#B93636",
-                        background: tema === "escuro" ? "#402523" : "#FFF1F0",
-                        border: "1px solid #B93636",
-                        borderRadius: "8px",
-                        padding: "12px",
-                        marginBottom: "16px",
-                        fontSize: "14px"
-                    }}>
+                    <p
+                        role="alert"
+                        style={{
+                            color: "#B93636",
+                            background: tema === "escuro"
+                                ? "#402523"
+                                : "#FFF1F0",
+                            border: "1px solid #B93636",
+                            borderRadius: "8px",
+                            padding: "12px",
+                            marginBottom: "16px",
+                            fontSize: "14px"
+                        }}
+                    >
                         {erroCadastro}
                     </p>
                 )}
 
+                {/* Mensagem de sucesso */}
                 {sucessoCadastro && (
                     <p style={{
                         color: "#16A36A",
@@ -152,6 +166,7 @@ function Cadastro({ onVoltarLogin, setToken, tema, onAlternarTema }) {
 
                 <form onSubmit={handleCadastro} autoComplete="off">
 
+                    {/* Campo nome */}
                     <div style={{ marginBottom: "18px" }}>
                         <label style={{
                             display: "block",
@@ -182,6 +197,7 @@ function Cadastro({ onVoltarLogin, setToken, tema, onAlternarTema }) {
                         />
                     </div>
 
+                    {/* Campo e-mail */}
                     <div style={{ marginBottom: "18px" }}>
                         <label style={{
                             display: "block",
@@ -212,6 +228,7 @@ function Cadastro({ onVoltarLogin, setToken, tema, onAlternarTema }) {
                         />
                     </div>
 
+                    {/* Campo senha */}
                     <div style={{ marginBottom: "22px" }}>
                         <label style={{
                             display: "block",
@@ -242,6 +259,7 @@ function Cadastro({ onVoltarLogin, setToken, tema, onAlternarTema }) {
                         />
                     </div>
 
+                    {/* Botão cadastrar */}
                     <button
                         type="submit"
                         style={{
@@ -261,6 +279,7 @@ function Cadastro({ onVoltarLogin, setToken, tema, onAlternarTema }) {
 
                 </form>
 
+                {/* Botão voltar para o login */}
                 <div style={{
                     borderTop: "1px solid var(--tema-borda)",
                     marginTop: "20px",
