@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import api from "../services/api";
 import "./css/Perfil.css";
 
 function Perfil() {
@@ -16,8 +17,11 @@ function Perfil() {
     const [emailEditado, setEmailEditado] = useState(email);
     const [mensagem, setMensagem] = useState("");
     const [tipoMensagem, setTipoMensagem] = useState("sucesso");
-    const [mostrarAvisoSenha, setMostrarAvisoSenha] = useState(false);
 
+    const [carregandoRecuperacao, setCarregandoRecuperacao] =
+        useState(false);
+
+    // Inicia a edição dos dados pessoais
     function iniciarEdicao() {
         setNomeEditado(nome);
         setEmailEditado(email);
@@ -25,6 +29,7 @@ function Perfil() {
         setEditando(true);
     }
 
+    // Salva as informações do perfil
     function salvarPerfil(event) {
         event.preventDefault();
 
@@ -54,6 +59,7 @@ function Perfil() {
         setMensagem("Informações atualizadas neste navegador.");
     }
 
+    // Cancela a edição dos dados
     function cancelarEdicao() {
         setNomeEditado(nome);
         setEmailEditado(email);
@@ -61,22 +67,69 @@ function Perfil() {
         setMensagem("");
     }
 
+    // Solicita a recuperação de senha pelo e-mail cadastrado
+    async function solicitarRecuperacaoSenha() {
+        setMensagem("");
+
+        if (!email.trim()) {
+            setTipoMensagem("erro");
+            setMensagem("Não foi possível identificar seu e-mail.");
+            return;
+        }
+
+        setCarregandoRecuperacao(true);
+
+        try {
+            const resposta = await api.post("/auth/recuperar-senha", {
+                email: email.trim()
+            });
+
+            setTipoMensagem("sucesso");
+
+            setMensagem(
+                typeof resposta.data === "string"
+                    ? resposta.data
+                    : "Se o e-mail estiver cadastrado, você receberá um link para redefinir sua senha."
+            );
+
+        } catch (erro) {
+            console.error(
+                "Erro ao solicitar recuperação de senha:",
+                erro
+            );
+
+            setTipoMensagem("erro");
+            setMensagem(
+                "Não foi possível solicitar a recuperação. Tente novamente."
+            );
+
+        } finally {
+            setCarregandoRecuperacao(false);
+        }
+    }
+
     return (
         <main className="perfil-container">
+
             <header className="perfil-cabecalho">
                 <div className="perfil-avatar" aria-hidden="true">
                     {nome.charAt(0).toUpperCase()}
                 </div>
 
                 <div className="perfil-titulo">
-                    <span className="perfil-etiqueta">MINHA CONTA</span>
+                    <span className="perfil-etiqueta">
+                        MINHA CONTA
+                    </span>
+
                     <h1>Meu perfil</h1>
+
                     <p>
                         Gerencie suas informações pessoais e segurança.
                     </p>
                 </div>
             </header>
 
+            {/* Mensagens de sucesso ou erro */}
             {mensagem && (
                 <div
                     className={`perfil-mensagem perfil-mensagem-${tipoMensagem}`}
@@ -87,11 +140,17 @@ function Perfil() {
                 </div>
             )}
 
+            {/* SEÇÃO 1 - INFORMAÇÕES PESSOAIS */}
             <section className="perfil-card">
+
                 <div className="perfil-card-cabecalho">
                     <div>
-                        <span className="perfil-numero-secao">01</span>
+                        <span className="perfil-numero-secao">
+                            01
+                        </span>
+
                         <h2>Informações pessoais</h2>
+
                         <p>Seus dados de identificação.</p>
                     </div>
 
@@ -111,7 +170,10 @@ function Perfil() {
                         className="perfil-formulario"
                         onSubmit={salvarPerfil}
                     >
-                        <label htmlFor="perfil-nome">Nome</label>
+                        <label htmlFor="perfil-nome">
+                            Nome
+                        </label>
+
                         <input
                             id="perfil-nome"
                             type="text"
@@ -124,7 +186,10 @@ function Perfil() {
                             required
                         />
 
-                        <label htmlFor="perfil-email">E-mail</label>
+                        <label htmlFor="perfil-email">
+                            E-mail
+                        </label>
+
                         <input
                             id="perfil-email"
                             type="email"
@@ -142,6 +207,7 @@ function Perfil() {
                         </p>
 
                         <div className="perfil-acoes">
+
                             <button
                                 type="button"
                                 className="perfil-botao perfil-botao-secundario"
@@ -156,10 +222,12 @@ function Perfil() {
                             >
                                 Salvar alterações
                             </button>
+
                         </div>
                     </form>
                 ) : (
                     <div className="perfil-dados">
+
                         <div className="perfil-informacao">
                             <span>Nome completo</span>
                             <strong>{nome}</strong>
@@ -167,20 +235,31 @@ function Perfil() {
 
                         <div className="perfil-informacao">
                             <span>Endereço de e-mail</span>
+
                             <strong>
                                 {email || "E-mail não informado"}
                             </strong>
                         </div>
+
                     </div>
                 )}
+
             </section>
 
+            {/* SEÇÃO 2 - SEGURANÇA DA CONTA */}
             <section className="perfil-card">
+
                 <div className="perfil-card-cabecalho">
                     <div>
-                        <span className="perfil-numero-secao">02</span>
+                        <span className="perfil-numero-secao">
+                            02
+                        </span>
+
                         <h2>Segurança da conta</h2>
-                        <p>Proteção das suas informações de acesso.</p>
+
+                        <p>
+                            Proteção das suas informações de acesso.
+                        </p>
                     </div>
 
                     <span className="perfil-selo-seguranca">
@@ -190,6 +269,7 @@ function Perfil() {
                 </div>
 
                 <div className="perfil-opcao">
+
                     <div
                         className="perfil-icone-seguranca"
                         aria-hidden="true"
@@ -211,6 +291,7 @@ function Perfil() {
                                 height="11"
                                 rx="2"
                             />
+
                             <path d="M8 10V7a4 4 0 0 1 8 0v3" />
                             <path d="M12 14v3" />
                         </svg>
@@ -218,63 +299,36 @@ function Perfil() {
 
                     <div className="perfil-opcao-texto">
                         <strong>Senha de acesso</strong>
-                        <p>Sua senha não é exibida nesta página.</p>
+
+                        <p>
+                            Esqueceu sua senha? Solicite um link
+                            para cadastrar uma nova.
+                        </p>
                     </div>
 
                     <button
                         type="button"
                         className="perfil-botao perfil-botao-secundario"
-                        onClick={() => setMostrarAvisoSenha(true)}
+                        onClick={solicitarRecuperacaoSenha}
+                        disabled={carregandoRecuperacao}
                     >
-                        Alterar senha
+                        {carregandoRecuperacao
+                            ? "Enviando..."
+                            : "Esqueci minha senha"}
                     </button>
+
                 </div>
+
             </section>
 
             <footer className="perfil-rodape">
                 <span className="perfil-rodape-ponto" />
-                <p>Asares · Controle financeiro pessoal</p>
+
+                <p>
+                    Asares · Controle financeiro pessoal
+                </p>
             </footer>
 
-            {mostrarAvisoSenha && (
-                <div
-                    className="perfil-modal-fundo"
-                    onClick={() => setMostrarAvisoSenha(false)}
-                >
-                    <section
-                        className="perfil-modal"
-                        role="dialog"
-                        aria-modal="true"
-                        aria-labelledby="perfil-modal-titulo"
-                        onClick={(event) => event.stopPropagation()}
-                    >
-                        <div
-                            className="perfil-modal-icone"
-                            aria-hidden="true"
-                        >
-                            !
-                        </div>
-
-                        <h2 id="perfil-modal-titulo">
-                            Alteração de senha
-                        </h2>
-
-                        <p>
-                            Essa função ainda precisa ser conectada ao
-                            backend para verificar sua senha atual e
-                            salvar uma nova com segurança.
-                        </p>
-
-                        <button
-                            type="button"
-                            className="perfil-botao perfil-botao-principal"
-                            onClick={() => setMostrarAvisoSenha(false)}
-                        >
-                            Entendi
-                        </button>
-                    </section>
-                </div>
-            )}
         </main>
     );
 }
